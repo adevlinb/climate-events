@@ -13,20 +13,21 @@
 
 <div class="sidexside">
     <div class="vertical">
-    <h1><%= titlePage %></h1>
-    <form class="vertical" action="/events" method="POST">
-        <label>Title</label>
-        <input type="text" name="title">
-        <label>Location</label>
-        <input type="text" name="locationName" placeholder="Full Address / City / Country">
-        <label>Date</label>
-        <input type="date" name="dateOf">
-        <label>Time</label>
-        <input type="time" name="time">
-        <label>Notes</label>
-        <input type="text" name="notes">
-        <input type="submit" value="Add Event">
-    </form>
+        <h1><%= titlePage %></h1>
+        <form class="vertical" action="/events" method="POST">
+            <label>Title</label>
+            <input type="text" name="title">
+            <label>Location</label>
+            <input type="text" name="locationName" placeholder="Full Address / City / Country">
+            <label>Date</label>
+            <input type="date" name="dateOf">
+            <label>Time</label>
+            <input type="time" name="time">
+            <label>Notes</label>
+            <input type="text" name="notes">
+            <input type="submit" value="Add Event">
+        </form>
+    </div>
 </div>
 
 <%- include('../partials/footer') %>

@@ -8,7 +8,8 @@ module.exports = {
     index,
     new: newEvent,
     past,
-    create
+    create,
+    show
 }
 
 function index(req, res) {
@@ -58,4 +59,10 @@ function create(req, res) {
             })
         });
 
+};
+
+function show(req, res) {
+    Event.findById(req.params.id, function (err, event) {
+        res.render('events/show', { titlePage: 'Details', event });
+    });
 };

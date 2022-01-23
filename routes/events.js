@@ -11,5 +11,7 @@ router.get('/new', eventsCtrl.new);
 router.get('/past', eventsCtrl.past);
 // create new event
 router.post('/', eventsCtrl.create);
+// show details page
+router.get('/:id', eventsCtrl.show);
 
 module.exports = router;

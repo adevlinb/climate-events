@@ -24,6 +24,7 @@ a {
 
 #widget {
   width: 300px;
+  height: fit-content;
 }
 
 .sidexside {
@@ -45,10 +46,11 @@ a {
   border-style: solid;
   height: 75px;
   margin: 15px;
-  overflow: scroll;
+ 
 }
 
 #allEventMargin {
   margin-left: 20px;
-  height: 100vh;
+  height: 410px;
+  overflow: scroll;
 }

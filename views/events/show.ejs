@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+
+<% if (user) { %>
+<div class="sidexside">
+    <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
+            data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS
+            ANGELES
+            California</a>
+        <script>
+            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+        </script>
+    </div>
+    <% } %>
+
+        <div class="sidexside">
+            <div class="vertical">
+                <h1><%= titlePage %></h1>
+
+                <div class="event">
+                <table id="ALLflights">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <%= event.title %>
+                                </td>
+                                <td>
+                                    <%= event.location.locationName %>
+                                </td>
+                                <td>
+                                    <%= event.dateOf.toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= event.time %>
+                                </td>
+                                <td>
+                                    <%= event.notes %>
+                                </td>
+
+                            </tr>
+                    </tbody>
+                </table>
+
+        <form action="/events" method="POST">
+            <label>Add Tags!</label>
+            <input type="text" name="title">
+            <label>Location</label>
+        </form>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+            <%- include('../partials/footer') %>
