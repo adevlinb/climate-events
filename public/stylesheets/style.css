@@ -6,3 +6,49 @@ body {
 a {
   color: #00B7FF;
 }
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+}
+
+.login img {
+  height: 30px;
+}
+
+#navigation {
+  display: inline-flex;
+}
+
+#widget {
+  width: 300px;
+}
+
+.sidexside {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.event {
+  border-style: solid;
+  height: 75px;
+  margin: 15px;
+  overflow: scroll;
+}
+
+#allEventMargin {
+  margin-left: 20px;
+  height: 100vh;
+}
