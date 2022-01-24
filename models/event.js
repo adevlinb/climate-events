@@ -21,6 +21,7 @@ const eventSchema = new Schema({
     notes: {
         type: String
     },
+    timestamps: true
 });
 
 

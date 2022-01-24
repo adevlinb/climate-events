@@ -49,10 +49,9 @@
                     </tbody>
                 </table>
 
-        <form action="/events" method="POST">
+        <form action="/events/<%= event._id %>/tags" method="POST">
             <label>Add Tags!</label>
-            <input type="text" name="title">
-            <label>Location</label>
+            <input placeholder="please use format: '#tag'" "type="text" name="title">
         </form>
 
         </div>

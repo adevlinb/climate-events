@@ -1,4 +1,5 @@
 const Event = require('../models/event');
+const Tag = require('../models/tag');
 const fetch = require('node-fetch');
 const PTV_KEY = process.env.PTV_KEY
 const PTV_URL = 'https://api.myptv.com/geocoding/v1/locations/by-text?'
@@ -9,7 +10,8 @@ module.exports = {
     new: newEvent,
     past,
     create,
-    show
+    show,
+    tags
 }
 
 function index(req, res) {
@@ -66,3 +68,7 @@ function show(req, res) {
         res.render('events/show', { titlePage: 'Details', event });
     });
 };
+
+function tags(req, res) {
+    res.render('events/search', {titlePage: 'Search for tags!'})
+}

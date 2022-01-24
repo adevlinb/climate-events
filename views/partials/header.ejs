@@ -14,11 +14,11 @@
         <h1>CLIMATE EVENTS</h1>
             <% if (user) { %>
             <h1>Welcome <%= user.name %></h1>
-            <a href="/events" >MAIN PAGE</a>
-            <a href="/events/new">ADD EVENT</a>
-            <a href="/tags">SEARCH TAGS</a>
-            <a href="/events/past">PAST EVENTS</a>
-            <a href="/logout">LOG OUT</a>
+            <a class="navNames"href="/events" >MAIN PAGE</a>
+            <a class="navNames"href="/events/new">ADD EVENT</a>
+            <a class="navNames"href="/events/tags">SEARCH TAGS</a>
+            <a class="navNames"href="/events/past">PAST EVENTS</a>
+            <a class="navNames"href="/logout">LOG OUT</a>
             <% } else { %>
             <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
             <% } %>

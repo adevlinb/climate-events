@@ -9,9 +9,12 @@ router.get('/', eventsCtrl.index);
 router.get('/new', eventsCtrl.new);
 // past events
 router.get('/past', eventsCtrl.past);
+// get tag search page
+router.get('/tags', eventsCtrl.tags);
 // create new event
 router.post('/', eventsCtrl.create);
 // show details page
 router.get('/:id', eventsCtrl.show);
+
 
 module.exports = router;

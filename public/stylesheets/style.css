@@ -23,6 +23,7 @@ a {
 }
 
 #widget {
+  min-width: 300px;
   width: 300px;
   height: fit-content;
 }
@@ -53,4 +54,12 @@ a {
   margin-left: 20px;
   height: 410px;
   overflow: scroll;
+}
+
+#purple {
+  color: purple;
+}
+
+.navNames {
+  margin: 10px;
 }
