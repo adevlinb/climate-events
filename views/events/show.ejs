@@ -16,7 +16,7 @@
             <div class="vertical">
                 <h1><%= titlePage %></h1>
 
-                <div class="event">
+                <div >
                 <table id="ALLflights">
                     <thead>
                         <tr>
@@ -47,21 +47,20 @@
 
                             </tr>
                     </tbody>
+
+
+
                 </table>
 
         <form action="/events/<%= event._id %>/tags" method="POST">
             <label>Add Tags!</label>
-            <input placeholder="please use format: '#tag'" "type="text" name="title">
+            <input placeholder="format: '#tag #tag'" type="text" name="tags">
+            <p>You can add individual tags(#tag) or multiple tags (#tag #tag)</p>
+            <input type="submit" value="Add Tag(s)">
         </form>
 
         </div>
-
-
-
     </div>
-
-
-
 
 </div>
 
