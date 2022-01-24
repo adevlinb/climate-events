@@ -24,6 +24,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Notes</th>
+                            <th>Tags</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,39 +34,33 @@
                                 <td><%= event.dateOf.toLocaleDateString() %></td>
                                 <td><%= event.time %></td>
                                 <td><%= event.notes %></td>
+                                <td><%= event.tags.join(', ') %></td>
+
                             </tr>
                     </tbody>
                 </table>
 
-            <table id="show">
-                <thead>
-                    <tr>
-                        <th>Click on a tag to add one!</th>
-                    </tr>
-                </thead>
-               
-                <tbody>
-                    <tr>
+  
+                        <h5>Click on a tag to add one!</h5>
 
                         <% if(tags.length) { %>
 
                         <% tags.forEach(function(t) { %>
 
-                        <td><%= t.tag %></td>
+                        <form action="/events/<%= event._id %>/tags/<%= t._id %>" method="post">
+                            <input id="tags" type="submit" value="<%= t.tag %>">
+                        </form>
                         <% }) %>
-
+                        
                         <% } else { %>
                             <h1>ADD SOME TAGS!</h1>
                         <% } %>
-                    </tr>
-                </tbody>
-            </table>
            
 
                 <div id="addTag">
                 <form action="/events/<%= event._id %>/tags" method="POST">
                     <label>Add A New Tag!</label>
-                    <input placeholder="format: '#tag'" pattern="#[a-z-]{2,}" type="text" name="tag">
+                    <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
                     <input type="submit" value="Add Tag">
                 </form>
                 </div>

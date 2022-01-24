@@ -74,3 +74,11 @@ a {
   height: 410px;
   overflow: scroll;
 }
+
+#tags{
+  background: none;
+  color: purple;
+  border-style: none;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -20,7 +20,19 @@ const eventSchema = new Schema({
     },
     notes: {
         type: String
-    }
+    },
+    userId: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'User', 
+        timestamps: true
+    },
+    userName: {
+        type: String
+    },
+    userAvatar: {
+        type: String
+    },
+    tags: [String]
 });
 
 

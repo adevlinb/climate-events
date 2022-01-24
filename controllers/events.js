@@ -11,30 +11,34 @@ module.exports = {
     past,
     create,
     show,
-    tags
+    tags,
+    addTag
 }
 
 function index(req, res) {
     var today = new Date;
-    Event.find({ dateOf: {$gt: today}}, function(err, events){
+    Event.find({ dateOf: { $gt: today } }, function (err, events) {
         res.render('events/index', { titlePage: "All Events", events });
-    });     
+    });
 }
 
 function newEvent(req, res) {
-    res.render('events/new', { titlePage: 'Add Event:'});
+    res.render('events/new', { titlePage: 'Add Event:' });
 }
 
 function past(req, res) {
     var today = new Date;
-    Event.find({dateOf: {$lt: today}}, function(err, events){
-    res.render('events/past', { titlePage: 'Past Events', events});
+    Event.find({ dateOf: { $lt: today } }, function (err, events) {
+        res.render('events/past', { titlePage: 'Past Events', events });
     });
 }
 
 
 function create(req, res) {
     let location;
+    req.body.userId = req.user._id;
+    req.body.userName = req.user.name;
+    req.body.userAvatar = req.user.avatar;
     const qString = req.body.locationName
     const options = {
         method: "GET",
@@ -43,21 +47,21 @@ function create(req, res) {
     fetch(`${PTV_URL}${PTV_ENCODE}${qString}${PTV_KEY}`, options)
         .then(res => res.json())
         .then(result => {
-        location = {
-            locationName: req.body.locationName,
-            latitude: result.locations[0].referencePosition.latitude,
-            longitude: result.locations[0].referencePosition.longitude
-        }
-        req.body.location = location;
-            
+            location = {
+                locationName: req.body.locationName,
+                latitude: result.locations[0].referencePosition.latitude,
+                longitude: result.locations[0].referencePosition.longitude
+            }
+            req.body.location = location;
+
             var event = new Event(req.body);
             event.save(function (err) {
                 if (err) return res.redirect('/events/new');
                 console.log(event, 1);
                 var today = new Date;
-                Event.find({dateOf: { $gt: today }}, function (err, events) {
+                Event.find({ dateOf: { $gt: today } }, function (err, events) {
                     res.render('events/index', { titlePage: "All Events", events });
-                }); 
+                });
             })
         });
 
@@ -65,12 +69,23 @@ function create(req, res) {
 
 function show(req, res) {
     Event.findById(req.params.id, function (err, event) {
-        Tag.find({event: event._id}, function(err, tags){
-        res.render('events/show', { titlePage: 'Details', event, tags });
+        Tag.find({}, function (err, tags) {
+            res.render('events/show', { titlePage: 'Details', event, tags });
         })
     });
 };
 
 function tags(req, res) {
-    res.render('events/search', {titlePage: 'Search for tags!'})
+    res.render('events/search', { titlePage: 'Search for tags!' });
+}
+
+function addTag(req, res) {
+    Tag.findById(req.params.tid, function (err, tag) {
+        Event.findById(req.params.eid, function(err, event){
+            event.tags.push(tag.tag);
+            event.save(function(err){
+                res.redirect(`/events/${req.params.eid}`);
+            });
+        });
+    });
 }

@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+const isLoggedIn = require('./config/auth');
 
 app.use('/', indexRouter);
 app.use('/events', eventsRouter);
