@@ -58,8 +58,19 @@ a {
 
 #purple {
   color: purple;
+  font-size: smaller;
 }
 
 .navNames {
   margin: 10px;
+}
+
+#show {
+  margin-bottom: 50px;
+}
+
+#showTotal{
+  margin-left: 20px;
+  height: 410px;
+  overflow: scroll;
 }

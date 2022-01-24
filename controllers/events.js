@@ -65,7 +65,9 @@ function create(req, res) {
 
 function show(req, res) {
     Event.findById(req.params.id, function (err, event) {
-        res.render('events/show', { titlePage: 'Details', event });
+        Tag.find({event: event._id}, function(err, tags){
+        res.render('events/show', { titlePage: 'Details', event, tags });
+        })
     });
 };
 

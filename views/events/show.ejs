@@ -13,11 +13,10 @@
     <% } %>
 
         <div class="sidexside">
-            <div class="vertical">
+            <div class="vertical" id="showTotal">
                 <h1><%= titlePage %></h1>
-
-                <div >
-                <table id="ALLflights">
+                <div>
+                <table id="show">
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -29,36 +28,47 @@
                     </thead>
                     <tbody>
                             <tr>
-                                <td>
-                                    <%= event.title %>
-                                </td>
-                                <td>
-                                    <%= event.location.locationName %>
-                                </td>
-                                <td>
-                                    <%= event.dateOf.toLocaleDateString() %>
-                                </td>
-                                <td>
-                                    <%= event.time %>
-                                </td>
-                                <td>
-                                    <%= event.notes %>
-                                </td>
-
+                                <td><%= event.title %></td>
+                                <td><%= event.location.locationName %></td>
+                                <td><%= event.dateOf.toLocaleDateString() %></td>
+                                <td><%= event.time %></td>
+                                <td><%= event.notes %></td>
                             </tr>
                     </tbody>
-
-
-
                 </table>
 
-        <form action="/events/<%= event._id %>/tags" method="POST">
-            <label>Add Tags!</label>
-            <input placeholder="format: '#tag #tag'" type="text" name="tags">
-            <p>You can add individual tags(#tag) or multiple tags (#tag #tag)</p>
-            <input type="submit" value="Add Tag(s)">
-        </form>
+            <table id="show">
+                <thead>
+                    <tr>
+                        <th>Click on a tag to add one!</th>
+                    </tr>
+                </thead>
+               
+                <tbody>
+                    <tr>
 
+                        <% if(tags.length) { %>
+
+                        <% tags.forEach(function(t) { %>
+
+                        <td><%= t.tag %></td>
+                        <% }) %>
+
+                        <% } else { %>
+                            <h1>ADD SOME TAGS!</h1>
+                        <% } %>
+                    </tr>
+                </tbody>
+            </table>
+           
+
+                <div id="addTag">
+                <form action="/events/<%= event._id %>/tags" method="POST">
+                    <label>Add A New Tag!</label>
+                    <input placeholder="format: '#tag'" pattern="#[a-z-]{2,}" type="text" name="tag">
+                    <input type="submit" value="Add Tag">
+                </form>
+                </div>
         </div>
     </div>
 
