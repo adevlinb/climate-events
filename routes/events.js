@@ -15,6 +15,8 @@ router.post('/', isLoggedIn, eventsCtrl.create);
 router.get('/:id', isLoggedIn, eventsCtrl.show);
 // post new tag to current event
 router.post('/:tid/tags/:eid', isLoggedIn, eventsCtrl.addTag);
+// render edit ejs
+router.get('/:eid/edit', isLoggedIn, eventsCtrl.edit)
 
 
 module.exports = router;

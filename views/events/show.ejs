@@ -11,6 +11,9 @@
 
         <div class="vertical" id="allEventMargin">
             <h3><%= titlePage %></h3>
+            <% if(event.dateOf>= today) { %>
+            <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
+            <% }  %>
             <table>
                 <thead>
                     <tr>

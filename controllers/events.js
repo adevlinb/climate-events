@@ -11,7 +11,8 @@ module.exports = {
     past,
     create,
     show,
-    addTag
+    addTag,
+    edit
 }
 
 function index(req, res) {
@@ -89,4 +90,10 @@ function addTag(req, res) {
             });
         });
     });
+}
+
+function edit(req, res) {
+    Event.findById(req.params.eid, function(err, event){
+        res.render('events/edit', {titlePage: 'Edit Event', event})
+    })
 }
