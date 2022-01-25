@@ -3,7 +3,8 @@ const Tag = require('../models/tag');
 
 
 module.exports = {
-    create
+    create,
+    deleteTag
 }
 
 function create(req, res) {
@@ -16,4 +17,18 @@ function create(req, res) {
             })
         }
     })
+}
+
+function deleteTag (req, res) {
+    Tag.findById(req.params.tid, function (err, tag) {
+        Event.findById(req.params.eid, function (err, event) {
+            event.tags = event.tags.filter(function(ele){
+                if(ele !== tag.tag) return ele;
+            });
+            event.save(function (err) {
+                res.redirect(`/events/${req.params.eid}`);
+            });
+        });
+        
+    });
 }

@@ -5,5 +5,7 @@ var isLoggedIn = require('../config/auth');
 
 // path to create tags!
 router.post('/events/:id/tags', tagsCtrl.create);
+// delete tags from event
+router.delete('/:tid/event/:eid', isLoggedIn, tagsCtrl.deleteTag);
 
 module.exports = router;

@@ -45,9 +45,12 @@ a {
 
 .event {
   border-style: solid;
+  border-color: purple;
   height: 75px;
-  margin: 15px;
- 
+  margin-bottom: 15px;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80px;
 }
 
 #allEventMargin {
@@ -69,16 +72,24 @@ a {
   margin-bottom: 50px;
 }
 
-#showTotal{
-  margin-left: 20px;
-  height: 410px;
-  overflow: scroll;
-}
-
 #tags{
   background: none;
   color: purple;
   border-style: none;
   text-decoration: underline;
   cursor: pointer;
+  margin: 5px;
+}
+
+#searchTags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+#eventTitle {
+  color: blue;
+  font-weight: 500;
+  font-size: medium;
 }

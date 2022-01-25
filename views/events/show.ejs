@@ -1,72 +1,65 @@
 <%- include('../partials/header') %>
 
-<% if (user) { %>
-<div class="sidexside">
-    <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
-            data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS
-            ANGELES
-            California</a>
-        <script>
-            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-        </script>
-    </div>
-    <% } %>
+    <div class="sidexside">
 
-        <div class="sidexside">
-            <div class="vertical" id="showTotal">
-                <h1><%= titlePage %></h1>
-                <div>
-                <table id="show">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Location</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Notes</th>
-                            <th>Tags</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td><%= event.title %></td>
-                                <td><%= event.location.locationName %></td>
-                                <td><%= event.dateOf.toLocaleDateString() %></td>
-                                <td><%= event.time %></td>
-                                <td><%= event.notes %></td>
-                                <td><%= event.tags.join(', ') %></td>
+        <% if (user) { %>
+        <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
+            data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES California</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
+        </div>
+        <% } %>
 
-                            </tr>
-                    </tbody>
-                </table>
+        <div class="vertical" id="allEventMargin">
+            <h3><%= titlePage %></h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Notes</th>
+                        <th>Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= event.title %></td>
+                        <td><%= event.location.locationName %></td>
+                        <td><%= event.dateOf.toLocaleDateString() %></td>
+                        <td><%= event.time %></td>
+                        <td><%= event.notes %></td>
+                        <td><% tags.forEach(function(t) { %>
+                            <form action="/tags/<%= t._id %>/event/<%= event._id %>" method="delete">
+                                <input id="tags" type="submit" value="<%= t.tag %>">
+                            </form>
+                        <% }) %></td>
+                    </tr>
+                </tbody>
+            </table>
 
-  
-                        <h5>Click on a tag to add one!</h5>
-
-                        <% if(tags.length) { %>
-
-                        <% tags.forEach(function(t) { %>
-
+            <% if(event.dateOf >= today) { %>
+                <h5>Click on a tag to add one!</h5>
+                <% if(tags.length) { %>
+                    <% tags.forEach(function(t) { %>
                         <form action="/events/<%= event._id %>/tags/<%= t._id %>" method="post">
                             <input id="tags" type="submit" value="<%= t.tag %>">
                         </form>
-                        <% }) %>
-                        
-                        <% } else { %>
-                            <h1>ADD SOME TAGS!</h1>
-                        <% } %>
-           
-
+                    <% }) %>
+                <% } else { %>
+                    <h1>ADD SOME TAGS!</h1>
+                <% } %>
+            
                 <div id="addTag">
-                <form action="/events/<%= event._id %>/tags" method="POST">
-                    <label>Add A New Tag!</label>
-                    <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
-                    <input type="submit" value="Add Tag">
-                </form>
+                    <form action="/events/<%= event._id %>/tags" method="POST">
+                        <label>Add A New Tag!</label>
+                        <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
+                        <input type="submit" value="Add Tag">
+                    </form>
                 </div>
+            <% } %>
+
         </div>
     </div>
 
-</div>
-
-            <%- include('../partials/footer') %>
+<%- include('../partials/footer') %>

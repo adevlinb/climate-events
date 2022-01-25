@@ -1,68 +1,49 @@
 <%- include('../partials/header') %>
 
-    <a href="/events"> ALL </a>
-
-    <% tags.forEach(tag => { %>
-        
-        <a href="/events?tag=<%= tag.tag.substr(1) %>"> <%= tag.tag %></a>
-
-    <% }); %>
-
-
-    <% if (user) { %>
-        <div class="sidexside">
-            <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
-                data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES
-                California</a>
-            <script>
-                !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-            </script>
-        </div>
-    <% } %>
-
     <div class="sidexside">
-        <div class="vertical" id="allEventMargin">
-            <h1><%= titlePage %></h1>
-
-<% events.forEach(function(e) { %>
-    <div class="event">
-        <table id="eventTable">
-            <thead>
-                <tr>
-                    <th >Title</th>
-                    <th >Location</th>
-                    <th >Date</th>
-                    <th >Time</th>
-                    <th >Notes</th>
-                    <th >Weather</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr >
-                        <td >
-                            <%= e.title %>
-                        </td>
-                        <td >
-                            <%= e.location.locationName %>
-                        </td>
-                        <td >
-                            <%= e.dateOf.toLocaleDateString() %>
-                        </td>
-                        <td >
-                            <%= e.time %>
-                        </td>
-                        <td >
-                            <%= e.notes %>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        <td><a id="purple" href="/events/<%= e._id %>">DETAILS / UPDATE / EDIT / ADD TAGS!</a></td>
-
-
-
+        <% if (user) { %>
+        <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
+            data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES
+            California</a>
+        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
         </div>
-        <% }); %>
+        <% } %>
+
+        <div class="vertical" id="allEventMargin">
+            <h3><%= titlePage %></h3>
+            <div id="searchTags">
+                <a id="tags" href="/events"> ALL </a>
+                <% tags.forEach(tag=> { %>
+                <a id="tags" href="/events?tag=<%= tag.tag.substr(1) %>"><%= tag.tag %></a>
+                <% }); %>
+            </div>
+
+            <% events.forEach(function(e) { %>
+            <div class="event">
+                <div id="eventTitle"><%= e.title %></div>
+                <table >
+                    <thead>
+                        <tr>
+                            <th >Location</th>
+                            <th >Date</th>
+                            <th >Time</th>
+                            <th >Notes</th>
+                            <th >Weather</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td ><%= e.location.locationName %></td>
+                            <td ><%= e.dateOf.toLocaleDateString() %></td>
+                            <td ><%= e.time %></td>
+                            <td ><%= e.notes %></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <td><a id="purple" href="/events/<%= e._id %>">DETAILS</a></td>
+            </div>
+            <% }); %>
+        </div>
     </div>
 
 

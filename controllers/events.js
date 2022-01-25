@@ -73,9 +73,10 @@ function create(req, res) {
 };
 
 function show(req, res) {
+    var today = new Date;
     Event.findById(req.params.id, function (err, event) {
         Tag.find({tag: {$nin: event.tags}}, function (err, tags) {
-            res.render('events/show', { titlePage: 'Details', event, tags });
+            res.render('events/show', { titlePage: 'Details', event, tags, today });
         })
     });
 };
