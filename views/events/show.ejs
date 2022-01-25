@@ -29,9 +29,9 @@
                         <td><%= event.dateOf.toLocaleDateString() %></td>
                         <td><%= event.time %></td>
                         <td><%= event.notes %></td>
-                        <td><% tags.forEach(function(t) { %>
-                            <form action="/tags/<%= t._id %>/event/<%= event._id %>" method="delete">
-                                <input id="tags" type="submit" value="<%= t.tag %>">
+                        <td><% event.tags.forEach(function(tag) { %>
+                            <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
+                                <input id="tags" type="submit" value="<%= tag %>">
                             </form>
                         <% }) %></td>
                     </tr>
@@ -42,7 +42,7 @@
                 <h5>Click on a tag to add one!</h5>
                 <% if(tags.length) { %>
                     <% tags.forEach(function(t) { %>
-                        <form action="/events/<%= event._id %>/tags/<%= t._id %>" method="post">
+                        <form action="/events/<%= t._id %>/tags/<%= event._id %>" method="POST">
                             <input id="tags" type="submit" value="<%= t.tag %>">
                         </form>
                     <% }) %>
@@ -50,8 +50,8 @@
                     <h1>ADD SOME TAGS!</h1>
                 <% } %>
             
-                <div id="addTag">
-                    <form action="/events/<%= event._id %>/tags" method="POST">
+                <div id="createTag">
+                    <form action="/tags/event/<%= event._id %>" method="POST">
                         <label>Add A New Tag!</label>
                         <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
                         <input type="submit" value="Add Tag">

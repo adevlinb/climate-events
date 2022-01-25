@@ -8,6 +8,7 @@ module.exports = {
 }
 
 function create(req, res) {
+    console.log("hit the create route via tags")
     Tag.findOne({tag: req.body.tag}, function(err, tag){
         if (tag) {
             res.redirect(`/events/${req.params.id}`)
@@ -20,15 +21,17 @@ function create(req, res) {
 }
 
 function deleteTag (req, res) {
-    Tag.findById(req.params.tid, function (err, tag) {
+    console.log("I'm in delete tag")
+        let tag = "#" + req.params.tag
         Event.findById(req.params.eid, function (err, event) {
-            event.tags = event.tags.filter(function(ele){
-                if(ele !== tag.tag) return ele;
+            let newArray = event.tags.filter(function(ele){
+                if(ele !== tag) return ele;
             });
+            console.log(newArray);
+            event.tags = newArray;
             event.save(function (err) {
                 res.redirect(`/events/${req.params.eid}`);
             });
         });
-        
-    });
 }
+

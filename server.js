@@ -49,8 +49,8 @@ app.use(function (req, res, next) {
 const isLoggedIn = require('./config/auth');
 
 app.use('/', indexRouter);
+app.use('/tags', tagsRouter);
 app.use('/events', eventsRouter);
-app.use('/', tagsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -11,7 +11,6 @@ module.exports = {
     past,
     create,
     show,
-    tags,
     addTag
 }
 
@@ -81,15 +80,11 @@ function show(req, res) {
     });
 };
 
-function tags(req, res) {
-    res.render('events/search', { titlePage: 'Search for tags!' });
-}
-
 function addTag(req, res) {
     Tag.findById(req.params.tid, function (err, tag) {
-        Event.findById(req.params.eid, function(err, event){
+        Event.findById(req.params.eid, function (err, event) {
             event.tags.push(tag.tag);
-            event.save(function(err){
+            event.save(function (err) {
                 res.redirect(`/events/${req.params.eid}`);
             });
         });
