@@ -1,4 +1,14 @@
 <%- include('../partials/header') %>
+
+    <a href="/events"> ALL </a>
+
+    <% tags.forEach(tag => { %>
+        
+        <a href="/events?tag=<%= tag.tag.substr(1) %>"> <%= tag.tag %></a>
+
+    <% }); %>
+
+
     <% if (user) { %>
         <div class="sidexside">
             <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"

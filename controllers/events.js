@@ -17,8 +17,13 @@ module.exports = {
 
 function index(req, res) {
     var today = new Date;
-    Event.find({ dateOf: { $gt: today } }, function (err, events) {
-        res.render('events/index', { titlePage: "All Events", events });
+    const tag = req.query.tag
+    const query = tag ? 
+        { tags: `#${tag}`, dateOf: { $gt: today } } : { dateOf: { $gt: today } };
+    Event.find(query, function (err, events) {
+        Tag.find({}, function (err, tags){
+            res.render('events/index', { titlePage: "Events", events, tags});
+        })
     });
 }
 
@@ -69,7 +74,7 @@ function create(req, res) {
 
 function show(req, res) {
     Event.findById(req.params.id, function (err, event) {
-        Tag.find({}, function (err, tags) {
+        Tag.find({tag: {$nin: event.tags}}, function (err, tags) {
             res.render('events/show', { titlePage: 'Details', event, tags });
         })
     });
