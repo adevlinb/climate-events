@@ -5,6 +5,8 @@ var isLoggedIn = require('../config/auth');
 
 /* GET users listing. */
 router.get('/', isLoggedIn, eventsCtrl.index);
+// PUT /events/:eid (update functionality)
+router.put('/:eid', isLoggedIn, eventsCtrl.update);
 // add event
 router.get('/new', isLoggedIn, eventsCtrl.new);
 // past events
@@ -17,6 +19,7 @@ router.get('/:id', isLoggedIn, eventsCtrl.show);
 router.post('/:tid/tags/:eid', isLoggedIn, eventsCtrl.addTag);
 // render edit ejs
 router.get('/:eid/edit', isLoggedIn, eventsCtrl.edit)
+
 
 
 module.exports = router;

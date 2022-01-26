@@ -10,13 +10,11 @@
 
     <div class="vertical">
         <h3><%= titlePage %></h3>
-        <form class="vertical" action="/events/<%= event._id>" method="PUT">
+        <form class="vertical" action="/events/<%= event._id %>?_method=PUT" method="POST">
             <label>Title</label>
             <input type="text" name="title" value="<%= event.title%>">
-            <label>Location</label>
-            <input type="text" name="locationName" value="<%= event.locationName %>">
             <label>Date</label>
-            <input type="date" name="dateOf" value="<%= event.dateOf%>">
+            <input type="date" name="dateOf" value="<%= event.dateOf.toISOString().substr(0,10) %>">
             <label>Time</label>
             <input type="time" name="time" value="<%= event.time%>">
             <label>Notes</label>

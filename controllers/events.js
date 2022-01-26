@@ -12,7 +12,8 @@ module.exports = {
     create,
     show,
     addTag,
-    edit
+    edit,
+    update
 }
 
 function index(req, res) {
@@ -73,6 +74,7 @@ function create(req, res) {
 };
 
 function show(req, res) {
+    console.log('updating!')
     var today = new Date;
     Event.findById(req.params.id, function (err, event) {
         Tag.find({tag: {$nin: event.tags}}, function (err, tags) {
@@ -97,3 +99,13 @@ function edit(req, res) {
         res.render('events/edit', {titlePage: 'Edit Event', event})
     })
 }
+
+function update(req, res) {
+    Event.findOneAndUpdate({ "event._id": req.params.id }, req.body, { new: true }, function (err, event) {
+        event.save();
+        if (err || !event) return res.redirect('/events');
+        res.redirect(`/events/${event._id}`);
+        }
+    );
+}
+
