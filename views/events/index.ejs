@@ -1,16 +1,32 @@
 <%- include('../partials/header') %>
 
     <div class="sidexside">
-        <% if (user) { %>
-        <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
-            data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES
-            California</a>
-        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
+        <div class="vertical">
+            <% if (user) { %>
+            <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
+                data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES
+                California</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
+            </div>
+            <% } %>
+
+            <div id=>
+                <h3>Welcome to climate events!!</h3>
+                <p id="indDesc">Here you can keep a diary of your events
+                    and up date those events continuously to get the current weather
+                    at that location. Once the event date has passed it will move in to 
+                    your "PAST EVENTS" link at the top of the screen, where you will no longer
+                    be able to edit the events! Additionally you may add #tags so that you can 
+                    search through your events! Have fun!
+                </p>
+
+
+            </div>
         </div>
-        <% } %>
 
         <div class="vertical" id="allEventMargin">
             <h3><%= titlePage %></h3>
+            <h5>SEARCH TAGS!</h5>
             <div id="searchTags">
                 <a id="tags" href="/events"> ALL </a>
                 <% tags.forEach(tag=> { %>
@@ -41,10 +57,26 @@
                     </tbody>
                 </table>
                 <a id="purple" href="/events/<%= e._id %>">DETAILS</a>
-            </div>
+               
+                <% if (e.weather.length !== 0) { %>
+                        <div id="weatherBox">
+                            <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png" alt="">
+                            <p>Main Weather: <%= e.weather[0].main %></p>
+                            <p>Desc.: <%= e.weather[0].description %></p>
+                            <p>Current Temp: <%= e.weather[0].temperature %></p>
+                            <p>Feels Like: <%= e.weather[0].feels_like %></p>
+                            <p>Humidity%: <%= e.weather[0].humidity %></p>
+                            <p>Wind Speed(mph): <%= e.weather[0].wind_speed %></p>
+                            <p>As of: <%= e.weather[0].createdAt.toLocaleDateString() %></p>
+                            
+                        </div>
+
+                    <% } else { %>
+                        <h5>Please Add Weather In The Details Page!</h5>
+                    <% } %>
+                </div>
             <% }); %>
         </div>
     </div>
-
 
 <%- include('../partials/footer') %>

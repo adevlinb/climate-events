@@ -1,5 +1,6 @@
 const Event = require('../models/event');
 const Tag = require('../models/tag');
+const Weather = require
 const fetch = require('node-fetch');
 const { get } = require('express/lib/response');
 const PTV_KEY = process.env.PTV_KEY;
@@ -112,6 +113,7 @@ function update(req, res) {
 }
 
 function getWeather(req, res) {
+    let weatherData;
     Event.findById(req.params.eid, function(err, event){
     const options = {
         method: "GET",
@@ -121,16 +123,21 @@ function getWeather(req, res) {
     fetch(`${OPENWEATHER_URL}lat=${event.location.latitude}&lon=${event.location.longitude}&appid=${OPENWEATHER_KEY}&units=imperial`, options)
         .then(res => res.json())
         .then(result => {
-            const weatherData = result;
-            console.log(weatherData);
-            console.log(event.location);
+            weatherData = {
+                id: result.weather[0].id,
+                main: result.weather[0].main,
+                description: result.weather[0].description,
+                icon: result.weather[0].icon,
+                temperature: result.main.temp,
+                feels_like: result.main.feels_like,
+                humidity: result.main.humidity,
+                wind_speed: result.wind.speed
+            }
+            event.weather.unshift(weatherData);
+            event.save(function(err){
             res.redirect(`/events/${event._id}`);
-            });
-
-
-
-            
+            })
+        });       
     });
-
 }
 

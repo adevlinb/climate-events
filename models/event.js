@@ -9,8 +9,9 @@ const weatherSchema = new Schema({
     temperature: Number,
     feels_like: Number,
     humidity: Number,
-    wind_speed: Number
-})
+    wind_speed: Number,
+}, { timestamps: true }
+)
 
 
 const eventSchema = new Schema({
@@ -45,7 +46,7 @@ const eventSchema = new Schema({
         type: String
     },
     tags: [String], 
-    weather: [Object]
+    weather: [weatherSchema]
 });
 
 

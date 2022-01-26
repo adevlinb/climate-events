@@ -1,11 +1,23 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
 }
 
 a {
   color: #00B7FF;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+li {
+  list-style: none;
+}
+
+#logo {
+  margin-right: auto;
 }
 
 .login {
@@ -67,6 +79,8 @@ a {
 
 .navNames {
   margin: 10px;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 #show {
@@ -100,4 +114,8 @@ a {
   flex-direction: row;
   flex-wrap: wrap;
   max-width: 400px;
+}
+
+#indDesc {
+  max-width: 300px;
 }
