@@ -1,6 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const weatherSchema = new Schema({
+    id: Number,
+    main: String,
+    description: String,
+    icon: String,
+    temperature: Number,
+    feels_like: Number,
+    humidity: Number,
+    wind_speed: Number
+})
+
+
 const eventSchema = new Schema({
     title: {
         type: String,
@@ -32,7 +44,8 @@ const eventSchema = new Schema({
     userAvatar: {
         type: String
     },
-    tags: [String]
+    tags: [String], 
+    weather: [Object]
 });
 
 

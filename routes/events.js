@@ -19,6 +19,8 @@ router.get('/:id', isLoggedIn, eventsCtrl.show);
 router.post('/:tid/tags/:eid', isLoggedIn, eventsCtrl.addTag);
 // render edit ejs
 router.get('/:eid/edit', isLoggedIn, eventsCtrl.edit)
+// get current weather
+router.get('/:eid/weather', isLoggedIn, eventsCtrl.getWeather)
 
 
 

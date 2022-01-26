@@ -1,9 +1,12 @@
 const Event = require('../models/event');
 const Tag = require('../models/tag');
 const fetch = require('node-fetch');
-const PTV_KEY = process.env.PTV_KEY
-const PTV_URL = 'https://api.myptv.com/geocoding/v1/locations/by-text?'
-const PTV_ENCODE = process.env.PTV_ENCODE
+const { get } = require('express/lib/response');
+const PTV_KEY = process.env.PTV_KEY;
+const PTV_URL = 'https://api.myptv.com/geocoding/v1/locations/by-text?';
+const PTV_ENCODE = process.env.PTV_ENCODE;
+const OPENWEATHER_URL = process.env.OPENWEATHER_URL;
+const OPENWEATHER_KEY = process.env.OPENWEATHER_KEY;
 
 module.exports = {
     index,
@@ -13,7 +16,8 @@ module.exports = {
     show,
     addTag,
     edit,
-    update
+    update,
+    getWeather
 }
 
 function index(req, res) {
@@ -63,10 +67,9 @@ function create(req, res) {
             var event = new Event(req.body);
             event.save(function (err) {
                 if (err) return res.redirect('/events/new');
-                console.log(event, 1);
                 var today = new Date;
                 Event.find({ dateOf: { $gt: today } }, function (err, events) {
-                    res.render('events/index', { titlePage: "All Events", events });
+                    res.redirect('events/index', { titlePage: "All Events", events });
                 });
             })
         });
@@ -74,7 +77,6 @@ function create(req, res) {
 };
 
 function show(req, res) {
-    console.log('updating!')
     var today = new Date;
     Event.findById(req.params.id, function (err, event) {
         Tag.find({tag: {$nin: event.tags}}, function (err, tags) {
@@ -107,5 +109,28 @@ function update(req, res) {
         res.redirect(`/events/${event._id}`);
         }
     );
+}
+
+function getWeather(req, res) {
+    Event.findById(req.params.eid, function(err, event){
+    const options = {
+        method: "GET",
+        headers: { apiKey: `${OPENWEATHER_KEY}`, "Content-Type": "application/json" }
+    }
+ 
+    fetch(`${OPENWEATHER_URL}lat=${event.location.latitude}&lon=${event.location.longitude}&appid=${OPENWEATHER_KEY}&units=imperial`, options)
+        .then(res => res.json())
+        .then(result => {
+            const weatherData = result;
+            console.log(weatherData);
+            console.log(event.location);
+            res.redirect(`/events/${event._id}`);
+            });
+
+
+
+            
+    });
+
 }
 

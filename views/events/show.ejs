@@ -13,6 +13,7 @@
             <h3><%= titlePage %></h3>
             <% if(event.dateOf>= today) { %>
             <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
+            <a href="/events/<%= event._id %>/weather">UPDATE WEATHER</a>
             <% }  %>
             <table>
                 <thead>
@@ -40,7 +41,7 @@
                     </tr>
                 </tbody>
             </table>
-
+            <div id="addTagsLayout">
             <% if(event.dateOf >= today) { %>
                 <h5>Click on a tag to add one!</h5>
                 <% if(tags.length) { %>
@@ -51,15 +52,15 @@
                     <% }) %>
                 <% } else { %>
                     <h1>ADD SOME TAGS!</h1>
-                <% } %>
-            
-                <div id="createTag">
-                    <form action="/tags/event/<%= event._id %>" method="POST">
-                        <label>Add A New Tag!</label>
-                        <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
-                        <input type="submit" value="Add Tag">
-                    </form>
-                </div>
+            <% } %>
+            </div>
+            <div id="createTag">
+                <form action="/tags/event/<%= event._id %>" method="POST">
+                    <label>Add A New Tag!</label>
+                    <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
+                    <input type="submit" value="Add Tag">
+                </form>
+            </div>
             <% } %>
 
         </div>
