@@ -10,7 +10,7 @@
             </div>
             <% } %>
 
-            <div id=>
+            <div id="widget">
                 <h3>Welcome to climate events!!</h3>
                 <p id="indDesc">Here you can keep a diary of your events
                     and up date those events continuously to get the current weather
@@ -19,8 +19,6 @@
                     be able to edit the events! Additionally you may add #tags so that you can 
                     search through your events! Have fun!
                 </p>
-
-
             </div>
         </div>
 
@@ -35,45 +33,47 @@
             </div>
 
             <% events.forEach(function(e) { %>
-            <div class="event">
-                <div id="eventTitle"><%= e.title %></div>
-                <table >
-                    <thead>
-                        <tr>
-                            <th >Location</th>
-                            <th >Date</th>
-                            <th >Time</th>
-                            <th >Notes</th>
-                            <th >Weather</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr >
-                            <td ><%= e.location.locationName %></td>
-                            <td ><%= e.dateOf.toLocaleDateString() %></td>
-                            <td ><%= e.time %></td>
-                            <td ><%= e.notes %></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a id="purple" href="/events/<%= e._id %>">DETAILS</a>
-               
-                <% if (e.weather.length !== 0) { %>
+            <div id="event" >
+             
+                    <div class="sidexside" >
+                        <div class="vertical" id="eventTable">
+                            <h1><%= e.title %></h1>
+                            <table >
+                                <thead>
+                                    <tr>
+                                        <th >Location</th>
+                                        <th >Date</th>
+                                        <th >Time</th>
+                                        <th >Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr >
+                                        <td ><%= e.location.locationName %></td>
+                                        <td ><%= e.dateOf.toLocaleDateString() %></td>
+                                        <td ><%= e.time %></td>
+                                        <td ><%= e.notes %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a id="purple" href="/events/<%= e._id %>">DETAILS</a>
+                        </div>
+                        <% if (e.weather.length !== 0) { %>
                         <div id="weatherBox">
+                            <h1>Weather</h1>
                             <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png" alt="">
                             <p>Main Weather: <%= e.weather[0].main %></p>
                             <p>Desc.: <%= e.weather[0].description %></p>
-                            <p>Current Temp: <%= e.weather[0].temperature %></p>
-                            <p>Feels Like: <%= e.weather[0].feels_like %></p>
-                            <p>Humidity%: <%= e.weather[0].humidity %></p>
-                            <p>Wind Speed(mph): <%= e.weather[0].wind_speed %></p>
+                            <p>Current Temp: <%= e.weather[0].temperature %>°F</p>
+                            <p>Feels Like: <%= e.weather[0].feels_like %>°F</p>
+                            <p>Humidity: <%= e.weather[0].humidity %>%</p>
+                            <p>Wind Speed: <%= e.weather[0].wind_speed %>mph</p>
                             <p>As of: <%= e.weather[0].createdAt.toLocaleDateString() %></p>
-                            
                         </div>
-
-                    <% } else { %>
-                        <h5>Please Add Weather In The Details Page!</h5>
-                    <% } %>
+                        <% } else { %>
+                            <h5>Please Add Weather In The Details Page!</h5>
+                        <% } %>
+                    </div>
                 </div>
             <% }); %>
         </div>

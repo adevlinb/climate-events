@@ -24,11 +24,11 @@ module.exports = {
 function index(req, res) {
     var today = new Date;
     const tag = req.query.tag
-    const query = tag ? 
+    const query = tag ?
         { tags: `#${tag}`, dateOf: { $gt: today } } : { dateOf: { $gt: today } };
-    Event.find(query, function (err, events) {
-        Tag.find({}, function (err, tags){
-            res.render('events/index', { titlePage: "Events", events, tags});
+    Event.find(query).sort('dateOf').exec( function (err, events) {
+        Tag.find({}, function (err, tags) {
+            res.render('events/index', { titlePage: "Events", events, tags });
         })
     });
 }
@@ -70,7 +70,7 @@ function create(req, res) {
                 if (err) return res.redirect('/events/new');
                 var today = new Date;
                 Event.find({ dateOf: { $gt: today } }, function (err, events) {
-                    res.redirect('events/index', { titlePage: "All Events", events });
+                    res.redirect('/events');
                 });
             })
         });
@@ -80,7 +80,7 @@ function create(req, res) {
 function show(req, res) {
     var today = new Date;
     Event.findById(req.params.id, function (err, event) {
-        Tag.find({tag: {$nin: event.tags}}, function (err, tags) {
+        Tag.find({ tag: { $nin: event.tags } }, function (err, tags) {
             res.render('events/show', { titlePage: 'Details', event, tags, today });
         })
     });
@@ -98,8 +98,8 @@ function addTag(req, res) {
 }
 
 function edit(req, res) {
-    Event.findById(req.params.eid, function(err, event){
-        res.render('events/edit', {titlePage: 'Edit Event', event})
+    Event.findById(req.params.eid, function (err, event) {
+        res.render('events/edit', { titlePage: 'Edit Event', event })
     })
 }
 
@@ -108,36 +108,41 @@ function update(req, res) {
         event.save();
         if (err || !event) return res.redirect('/events');
         res.redirect(`/events/${event._id}`);
-        }
+    }
     );
 }
 
 function getWeather(req, res) {
     let weatherData;
-    Event.findById(req.params.eid, function(err, event){
-    const options = {
-        method: "GET",
-        headers: { apiKey: `${OPENWEATHER_KEY}`, "Content-Type": "application/json" }
-    }
- 
-    fetch(`${OPENWEATHER_URL}lat=${event.location.latitude}&lon=${event.location.longitude}&appid=${OPENWEATHER_KEY}&units=imperial`, options)
-        .then(res => res.json())
-        .then(result => {
-            weatherData = {
-                id: result.weather[0].id,
-                main: result.weather[0].main,
-                description: result.weather[0].description,
-                icon: result.weather[0].icon,
-                temperature: result.main.temp,
-                feels_like: result.main.feels_like,
-                humidity: result.main.humidity,
-                wind_speed: result.wind.speed
+    var today = new Date();
+    Event.findById(req.params.eid, function (err, event) {
+        if (event.weather.length === 0 || event.weather[0].createdAt.toISOString().substr(0, 10) !== today.toISOString().substr(0, 10)) {
+            const options = {
+                method: "GET",
+                headers: { apiKey: `${OPENWEATHER_KEY}`, "Content-Type": "application/json" }
             }
-            event.weather.unshift(weatherData);
-            event.save(function(err){
-            res.redirect(`/events/${event._id}`);
-            })
-        });       
+
+            fetch(`${OPENWEATHER_URL}lat=${event.location.latitude}&lon=${event.location.longitude}&appid=${OPENWEATHER_KEY}&units=imperial`, options)
+                .then(res => res.json())
+                .then(result => {
+                    weatherData = {
+                        id: result.weather[0].id,
+                        main: result.weather[0].main,
+                        description: result.weather[0].description,
+                        icon: result.weather[0].icon,
+                        temperature: result.main.temp,
+                        feels_like: result.main.feels_like,
+                        humidity: result.main.humidity,
+                        wind_speed: result.wind.speed
+                    }
+                    event.weather.unshift(weatherData);
+                    event.save(function (err) {
+                        res.redirect('/events');
+                    });
+                });
+        } else {
+            res.redirect('/events');
+        }
     });
 }
 

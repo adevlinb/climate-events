@@ -1,23 +1,46 @@
+html {
+    background-color: sandybrown;
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
+  background-image: url(../public/images/climate-events-logo.png);
+  background-color: rgb(253, 235, 213);
+  width: 100%;
+  height: 100%;
+}
+
+#landPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-top: 25vh;
+}
+
+#navDisplay {
+  display: flex;
+  flex-direction: row;
+  background-color: sandybrown;
+  background-size: cover;
+  width: 100%;
 }
 
 a {
-  color: #00B7FF;
+  color: purple;
 }
 
-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+#insideLogo {
+  max-height: 75px;
+  max-width: auto;
 }
-li {
+
+ul {
   list-style: none;
-}
-
-#logo {
-  margin-right: auto;
+  display: inline-flex;
+  flex-direction: row;
 }
 
 .login {
@@ -31,19 +54,23 @@ li {
   height: 30px;
 }
 
-#navigation {
-  display: inline-flex;
-}
+
 
 #widget {
   min-width: 300px;
   width: 300px;
   height: fit-content;
+  margin-top: 5px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2.5px;
+  border-radius: 5px;
 }
 
 .sidexside {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .vertical {
@@ -56,20 +83,22 @@ li {
   flex-direction: row;
 }
 
-.event {
+#event {
   border-style: solid;
   border-color: purple;
   margin-bottom: 20px;
+  margin-right: 20px;
   border-radius: 10px;
   padding: 10px;
-
+  background-color: lightblue;
 }
 
 #allEventMargin {
   margin-left: 20px;
-  height: 410px;
+  height: 80vh;
   max-width: 100vw;
   overflow: scroll;
+  padding-right: 5px;
 }
 
 #purple {
@@ -118,4 +147,15 @@ li {
 
 #indDesc {
   max-width: 300px;
+}
+
+#weatherBox {
+  border: solid 3px purple;
+  border-radius: 10px;
+
+}
+
+#eventTable {
+   border: solid 3px purple;
+  border-radius: 10px;
 }
