@@ -1,129 +1,56 @@
 <%- include('../partials/header') %>
 
-    <% if (user) { %>
-        <div class="sidexside">
-            <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
-                    data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES California</a>
-            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
-        </div>
-    <% } %>
-
-<%- include('../partials/header') %>
 
     <div class="horizontal">
 
         <div class="vertical">
-            <% if (user) { %>
                 <div id=widget>
-                    <h3>Welcome !!</h3>
+                    <h3> Create an Event!</h3>
                     <p id="indDesc">
-                        Here you can keep a diary of your events
-                        and up date those events continuously to get the current weather
-                        at that location. Once the event date has passed it will move in to
-                        your "PAST EVENTS" link at the top of the screen, where you will no longer
-                        be able to edit the events! Additionally you may add #tags so that you can
-                        search through your events! Have fun!
+                        Here you can add new events to your planner! You may type in
+                        any address in the world and our api will convert that address into 
+                        latitudinal and longitudinal coordinates that will be used to 
+                        grab weather data for your events! You can be as specific as the address 
+                        for the location you want to go to, or generic using the City Name, and State or
+                        Country Name! Then add a date with specific time informtation (not required) along with
+                        notes, which are not required either! You can always edit / update the information later.
+                        Only the location will be un-editable. You will have to create new event if you want to change the location.
+                        Have fun!
                     </p>
                 </div>
-                <% } %>
-                    <div id="widget" class="vertical">
-                        <h3 id="tagSearchTitle">CLICK ON A TAG TO SEARCH!</h3>
-                        <div id="tagSearch">
-                            <a id="tags" href="/events"> ALL </a>
-                            <% tags.forEach(tag=> { %>
-                                <a id="tags" href="/events?tag=<%= tag.tag.substr(1) %>">
-                                    <%= tag.tag %>
-                                </a>
-                                <% }); %>
-                        </div>
-                    </div>
         </div>
 
         <div class="vertical" id="mainPageTitle">
-            <h3>
-                <%= user.name %>'s <%= titlePage %>
-            </h3>
             <div id="allEventMargin">
-
-                <% events.forEach(function(e) { %>
-                    <div class="event" class="horizontal">
-
-                        <div class="eventTable" class="horizontal">
-                            <h1 class="eventTitle">
-                                <%= e.title %>
-                            </h1>
-                            <p class="weatherText">LOCATION: <%= e.location.locationTitle %>
-                            </p>
-                            <p class="weatherText">DATE: <%= e.dateOf.toLocaleDateString() %>
-                            </p>
-                            <p class="weatherText">TIME: <%= e.time %>
-                            </p>
-                            <p class="weatherText">NOTES: <%= e.notes %>
-                            </p>
-                            <a href="/events/<%= e._id %>">DETAILS</a>
-                        </div>
-
-                        <% if (e.weather.length !==0) { %>
-
-                            <div class="weatherBox" class="horizontal">
-                                <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %>
-                                </h3>
-                                <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png">
-                                <p class="weatherText">WEATHER: <%= e.weather[0].main %>
-                                </p>
-                                <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>
-                                <p class="weatherText">FEELS LIKE: <%= e.weather[0].feels_like %>°F</p>
-                                <p class="weatherText">HUMIDITY: <%= e.weather[0].humidity %>%</p>
-                                <p class="weatherText">WIND: <%= e.weather[0].wind_speed %>mph</p>
-                            </div>
-                            <% } else { %>
-                                <h5>Please Add Weather In The Details Page!</h5>
-                                <% } %>
+                <div class="event" class="horizontal">
+                    <div class="vertical">
+                        <h3><%= titlePage %></h3>
+                        <form class="vertical" class="newEvent" action="/events" method="POST">
+                                <label>Title</label>
+                                <input type="text" name="title">
+                                <label>Location</label>
+                                <input type="text" name="locationName" placeholder="Full Address / City / Country">
+                                <label>Date</label>
+                                <input type="date" name="dateOf">
+                                <label>Time</label>
+                                <input type="time" name="time">
+                                <label>Notes</label>
+                                <textarea type="textarea" name="notes"></textarea>
+                                <input type="submit" value="Add Event">
+                        </form>
                     </div>
-                    <% }); %>
+                    <div class="weatherBox" class="horizontal">
+                        <h3 class="weatherTitle">WEATHER</h3>
+                        <p>You will be able to add weather and tags to this
+                            space once you have created your event. You can update both
+                            on the details page for that event! The link will be in the
+                            event on the main events page.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="vertical">
-        <h3><%= titlePage %></h3>
-        <form class="vertical" action="/events" method="POST">
-            <label>Title</label>
-            <input type="text" name="title">
-            <label>Location</label>
-            <input type="text" name="locationName" placeholder="Full Address / City / Country">
-            <label>Date</label>
-            <input type="date" name="dateOf">
-            <label>Time</label>
-            <input type="time" name="time">
-            <label>Notes</label>
-            <textarea type="textarea" name="notes"></textarea>
-            <input type="submit" value="Add Event">
-        </form>
-    </div>
-</div>
 
 <%- include('../partials/footer') %>

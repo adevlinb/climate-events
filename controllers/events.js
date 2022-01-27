@@ -34,7 +34,7 @@ function index(req, res) {
 }
 
 function newEvent(req, res) {
-    res.render('events/new', { titlePage: 'Add Event:' });
+    res.render('events/new', { titlePage: 'CREATE A NEW EVENT:' });
 }
 
 function past(req, res) {
