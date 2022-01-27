@@ -23,6 +23,7 @@ body {
 #navDisplay {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   background-color: sandybrown;
   background-size: cover;
   width: 100%;
@@ -35,6 +36,7 @@ a {
 #insideLogo {
   max-height: 75px;
   max-width: auto;
+  float: left;
 }
 
 ul {
@@ -136,6 +138,7 @@ ul {
   color: blue;
   font-weight: 500;
   font-size: medium;
+  text-transform: uppercase;
 }
 
 #addTagsLayout {
@@ -152,10 +155,11 @@ ul {
 #weatherBox {
   border: solid 3px purple;
   border-radius: 10px;
-
+  width: 40%;
 }
 
 #eventTable {
    border: solid 3px purple;
   border-radius: 10px;
+  width: 55%;
 }
