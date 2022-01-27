@@ -1,82 +1,68 @@
 <%- include('../partials/header') %>
 
-    <div class="sidexside">
+    <div class="horizontal">
+
         <div class="vertical">
             <% if (user) { %>
-            <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
-                data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES
-                California</a>
-            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
-            </div>
-            <% } %>
-
-            <div id="widget">
-                <h3>Welcome to climate events!!</h3>
-                <p id="indDesc">Here you can keep a diary of your events
+            <div id=widget>
+                <h3>Welcome !!</h3>
+                <p id="indDesc">
+                    Here you can keep a diary of your events
                     and up date those events continuously to get the current weather
-                    at that location. Once the event date has passed it will move in to 
+                    at that location. Once the event date has passed it will move in to
                     your "PAST EVENTS" link at the top of the screen, where you will no longer
-                    be able to edit the events! Additionally you may add #tags so that you can 
+                    be able to edit the events! Additionally you may add #tags so that you can
                     search through your events! Have fun!
                 </p>
             </div>
+            <% } %>
+            <div id="widget" class="vertical">
+                <h3 id="tagSearchTitle">CLICK ON A TAG TO SEARCH!</h3>
+                <div id="tagSearch">
+                    <a id="tags" href="/events"> ALL </a>
+                    <% tags.forEach(tag=> { %>
+                        <a id="tags" href="/events?tag=<%= tag.tag.substr(1) %>"><%= tag.tag %></a>
+                    <% }); %>
+                </div>
+            </div>
         </div>
+          
+        <div class="vertical" id="mainPageTitle">
+            <h3><%= user.name %>'s <%= titlePage %></h3>
+            <div id="allEventMargin">
+                
+                <% events.forEach(function(e) { %>
+                <div id="event" class="horizontal">
 
-        <div class="vertical" id="allEventMargin">
-            <h3><%= titlePage %></h3>
-            <h5>SEARCH TAGS!</h5>
-            <div id="searchTags">
-                <a id="tags" href="/events"> ALL </a>
-                <% tags.forEach(tag=> { %>
-                <a id="tags" href="/events?tag=<%= tag.tag.substr(1) %>"><%= tag.tag %></a>
+                    <div id="eventTable" class="horizontal">
+                        <h1 id="eventTitle"><%= e.title %></h1>
+                        <p class="weatherText">LOCATION: <%= e.location.locationName %></p>
+                        <p class="weatherText">DATE: <%= e.dateOf.toLocaleDateString() %></p>
+                        <p class="weatherText">TIME: <%= e.time %></p>
+                        <p class="weatherText">NOTES: <%= e.notes %></p>
+                        <a href="/events/<%= e._id %>">DETAILS</a>
+                    </div>
+
+                    <% if (e.weather.length !== 0) { %>
+
+                    <div id="weatherBox" class="horizontal">
+                        <h3 id="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
+                        <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png">
+                            <p class="weatherText">WEATHER: <%= e.weather[0].main %></p>
+                            <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>
+                            <p class="weatherText">FEELS LIKE: <%= e.weather[0].feels_like %>°F</p>
+                            <p class="weatherText">HUMIDITY: <%= e.weather[0].humidity %>%</p>
+                            <p class="weatherText">WIND: <%= e.weather[0].wind_speed %>mph</p>
+                    </div>
+                    <% } else { %>
+                        <h5>Please Add Weather In The Details Page!</h5>
+                    <% } %>
+                </div>
                 <% }); %>
             </div>
-
-            <% events.forEach(function(e) { %>
-            <div id="event" >
-             
-                    <div class="sidexside" >
-                        <div class="vertical" id="eventTable">
-                            <h1 id="eventTitle"><%= e.title %></h1>
-                            <table >
-                                <thead>
-                                    <tr>
-                                        <th >Location</th>
-                                        <th >Date</th>
-                                        <th >Time</th>
-                                        <th >Notes</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr >
-                                        <td ><%= e.location.locationName %></td>
-                                        <td ><%= e.dateOf.toLocaleDateString() %></td>
-                                        <td ><%= e.time %></td>
-                                        <td ><%= e.notes %></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <a id="purple" href="/events/<%= e._id %>">DETAILS</a>
-                        </div>
-                        <% if (e.weather.length !== 0) { %>
-                        <div id="weatherBox">
-                            <h1>Weather</h1>
-                            <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png" alt="">
-                            <p>Main Weather: <%= e.weather[0].main %></p>
-                            <p>Desc.: <%= e.weather[0].description %></p>
-                            <p>Current Temp: <%= e.weather[0].temperature %>°F</p>
-                            <p>Feels Like: <%= e.weather[0].feels_like %>°F</p>
-                            <p>Humidity: <%= e.weather[0].humidity %>%</p>
-                            <p>Wind Speed: <%= e.weather[0].wind_speed %>mph</p>
-                            <p>As of: <%= e.weather[0].createdAt.toLocaleDateString() %></p>
-                        </div>
-                        <% } else { %>
-                            <h5>Please Add Weather In The Details Page!</h5>
-                        <% } %>
-                    </div>
-                </div>
-            <% }); %>
         </div>
     </div>
+    
+ 
 
 <%- include('../partials/footer') %>

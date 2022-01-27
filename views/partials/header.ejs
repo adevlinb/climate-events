@@ -12,10 +12,9 @@
 <body>
         <div id='navDisplay'>
             <% if (user) { %>
-            <img id="insideLogo" src="/images/climate-events-logo.png" alt="logo" height="400px">
+            <img id="insideLogo" src="/images/climate-events-logo.png" alt="logo">
             <nav>
                 <ul>
-                    <h3>Welcome: <%= user.name %></h3>
                     <li><a class="navNames"href="/events" >EVENTS</a></li>
                     <li><a class="navNames"href="/events/new">ADD EVENT</a></li>
                     <li><a class="navNames"href="/events/past">PAST EVENTS</a></li>

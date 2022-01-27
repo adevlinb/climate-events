@@ -59,7 +59,7 @@ function create(req, res) {
         .then(res => res.json())
         .then(result => {
             location = {
-                locationName: req.body.locationName,
+                locationName: result.locations[0].address.city,
                 latitude: result.locations[0].referencePosition.latitude,
                 longitude: result.locations[0].referencePosition.longitude
             }
