@@ -32,11 +32,11 @@
             <div id="allEventMargin">
                 
                 <% events.forEach(function(e) { %>
-                <div id="event" class="horizontal">
+                <div class="event" class="horizontal">
 
-                    <div id="eventTable" class="horizontal">
-                        <h1 id="eventTitle"><%= e.title %></h1>
-                        <p class="weatherText">LOCATION: <%= e.location.locationName %></p>
+                    <div class="eventTable" class="horizontal">
+                        <h1 class="eventTitle"><%= e.title %></h1>
+                        <p class="weatherText">LOCATION: <%= e.location.locationTitle %></p>
                         <p class="weatherText">DATE: <%= e.dateOf.toLocaleDateString() %></p>
                         <p class="weatherText">TIME: <%= e.time %></p>
                         <p class="weatherText">NOTES: <%= e.notes %></p>
@@ -45,8 +45,8 @@
 
                     <% if (e.weather.length !== 0) { %>
 
-                    <div id="weatherBox" class="horizontal">
-                        <h3 id="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
+                    <div class="weatherBox" class="horizontal">
+                        <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
                         <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png">
                             <p class="weatherText">WEATHER: <%= e.weather[0].main %></p>
                             <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>

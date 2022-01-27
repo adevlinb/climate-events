@@ -20,6 +20,7 @@ const eventSchema = new Schema({
         required: true
     },
     location: {
+        locationTitle: String,
         locationName: String,
         latitude: String,
         longitude: String

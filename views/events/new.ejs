@@ -8,6 +8,105 @@
         </div>
     <% } %>
 
+<%- include('../partials/header') %>
+
+    <div class="horizontal">
+
+        <div class="vertical">
+            <% if (user) { %>
+                <div id=widget>
+                    <h3>Welcome !!</h3>
+                    <p id="indDesc">
+                        Here you can keep a diary of your events
+                        and up date those events continuously to get the current weather
+                        at that location. Once the event date has passed it will move in to
+                        your "PAST EVENTS" link at the top of the screen, where you will no longer
+                        be able to edit the events! Additionally you may add #tags so that you can
+                        search through your events! Have fun!
+                    </p>
+                </div>
+                <% } %>
+                    <div id="widget" class="vertical">
+                        <h3 id="tagSearchTitle">CLICK ON A TAG TO SEARCH!</h3>
+                        <div id="tagSearch">
+                            <a id="tags" href="/events"> ALL </a>
+                            <% tags.forEach(tag=> { %>
+                                <a id="tags" href="/events?tag=<%= tag.tag.substr(1) %>">
+                                    <%= tag.tag %>
+                                </a>
+                                <% }); %>
+                        </div>
+                    </div>
+        </div>
+
+        <div class="vertical" id="mainPageTitle">
+            <h3>
+                <%= user.name %>'s <%= titlePage %>
+            </h3>
+            <div id="allEventMargin">
+
+                <% events.forEach(function(e) { %>
+                    <div class="event" class="horizontal">
+
+                        <div class="eventTable" class="horizontal">
+                            <h1 class="eventTitle">
+                                <%= e.title %>
+                            </h1>
+                            <p class="weatherText">LOCATION: <%= e.location.locationTitle %>
+                            </p>
+                            <p class="weatherText">DATE: <%= e.dateOf.toLocaleDateString() %>
+                            </p>
+                            <p class="weatherText">TIME: <%= e.time %>
+                            </p>
+                            <p class="weatherText">NOTES: <%= e.notes %>
+                            </p>
+                            <a href="/events/<%= e._id %>">DETAILS</a>
+                        </div>
+
+                        <% if (e.weather.length !==0) { %>
+
+                            <div class="weatherBox" class="horizontal">
+                                <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %>
+                                </h3>
+                                <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png">
+                                <p class="weatherText">WEATHER: <%= e.weather[0].main %>
+                                </p>
+                                <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>
+                                <p class="weatherText">FEELS LIKE: <%= e.weather[0].feels_like %>°F</p>
+                                <p class="weatherText">HUMIDITY: <%= e.weather[0].humidity %>%</p>
+                                <p class="weatherText">WIND: <%= e.weather[0].wind_speed %>mph</p>
+                            </div>
+                            <% } else { %>
+                                <h5>Please Add Weather In The Details Page!</h5>
+                                <% } %>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="vertical">
         <h3><%= titlePage %></h3>

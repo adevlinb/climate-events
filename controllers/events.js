@@ -58,14 +58,16 @@ function create(req, res) {
     fetch(`${PTV_URL}${PTV_ENCODE}${qString}${PTV_KEY}`, options)
         .then(res => res.json())
         .then(result => {
+            console.log(result.locations[0].formattedAddress);
             location = {
-                locationName: result.locations[0].address.city,
+                locationTitle: `${result.locations[0].address.city}, ${result.locations[0].address.state}, ${result.locations[0].address.country}`,
+                locationName: req.body.locationName,
                 latitude: result.locations[0].referencePosition.latitude,
                 longitude: result.locations[0].referencePosition.longitude
             }
             req.body.location = location;
-
             var event = new Event(req.body);
+            console.log(event);
             event.save(function (err) {
                 if (err) return res.redirect('/events/new');
                 var today = new Date;

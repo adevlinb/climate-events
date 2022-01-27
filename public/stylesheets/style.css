@@ -4,13 +4,15 @@ body {
   background-image: url(../public/images/climate-events-logo.png);
   background-color: rgb(253, 235, 213);
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  margin: 0;
 }
 
 .vertical {
   display: flex;
   flex-direction: column;
 }
+
 
 .horizontal {
   display: flex;
@@ -38,6 +40,10 @@ body {
   flex-direction: row;
   background-image: url("/images/stone2.jpeg");
   margin-top: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #insideLogo {
@@ -104,10 +110,10 @@ li {
   overflow: scroll;
 }
 
-#event {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.event {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
   border-style: solid;
   border-color: purple;
   border-width: 5px;
@@ -134,7 +140,7 @@ li {
   margin: 5px;
 }
 
-#eventTitle {
+.eventTitle {
   color: blue;
   font-weight: 500;
   font-size: medium;
@@ -148,8 +154,7 @@ li {
   max-width: 300px;
 }
 
-#eventTable {
-  max-width: 60%;
+.eventTable {
   padding: 5px;
   margin-right: 5px;
   display: flex;
@@ -161,13 +166,12 @@ li {
   text-align: left;
 }
 
-#weatherBox {
+.weatherBox {
   display: flex;
   flex-direction: column;
   align-items: center;
   border: solid 3px purple;
   border-radius: 10px;
-  width: 30%;
   min-width: fit-content;
   padding: 5px;
 
@@ -177,7 +181,7 @@ li {
   margin: 2px;
 }
 
-#weatherTitle {
+.weatherTitle {
   font-weight: 500;
   font-size: medium;
   text-transform: uppercase;
