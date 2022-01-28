@@ -1,69 +1,85 @@
 <%- include('../partials/header') %>
 
-    <div class="sidexside">
+    <div class="horizontal">
+        <div class="vertical" id="mainPageTitle">
 
-        <% if (user) { %>
-        <div id=widget><a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us"
-            data-label_1="LOS ANGELES" data-label_2="California" data-days="5" data-theme="tile_wood">LOS ANGELES California</a>
-            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');</script>
-        </div>
-        <% } %>
+            <h3>ToolBar</h3>
+            <div class=widget>
+                <h3 id="tagSearchTitle">Details</h3>
+                <p id="indDesc">
+                    Here you can edit / update your event, add tags to your
+                    event, create new tags, and add wesather for the first time / 
+                    update it on a daily basis. You will only be able to update
+                    once a day and get the current weather at the time.
+                </p>
+            </div>
 
-        <div class="vertical" id="allEventMargin">
-            <h3><%= titlePage %></h3>
-            <% if(event.dateOf>= today) { %>
-            <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
-            <a href="/events/<%= event._id %>/weather">UPDATE WEATHER</a>
-            <% }  %>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Location</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Notes</th>
-                        <th>Tags</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><%= event.title %></td>
-                        <td><%= event.location.locationName %></td>
-                        <td><%= event.dateOf.toLocaleDateString() %></td>
-                        <td><%= event.time %></td>
-                        <td><%= event.notes %></td>
-                        <td><% event.tags.forEach(function(tag) { %>
-                            <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
-                                <input id="tags" type="submit" value="<%= tag %>">
-                            </form>
-                        <% }) %></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div id="addTagsLayout">
             <% if(event.dateOf >= today) { %>
-                <h5>Click on a tag to add one!</h5>
-                <% if(tags.length) { %>
-                    <% tags.forEach(function(t) { %>
+            <div class="widget" class="vertical" id="search">
+                <h3 id="tagSearchTitle">Click on a tag to add one!</h3>
+                <div id="tagSearch">
+                    <% if(tags.length) { %>
+                        <% tags.forEach(function(t) { %>
                         <form action="/events/<%= t._id %>/tags/<%= event._id %>" method="POST">
-                            <input id="tags" type="submit" value="<%= t.tag %>">
-                        </form>
+                        <input class="tags2" type="submit" value="<%= t.tag %>"></form>
                     <% }) %>
                 <% } else { %>
                     <h1>ADD SOME TAGS!</h1>
-            <% } %>
+                <% } %>
+                </div>
             </div>
-            <div id="createTag">
+          
+            <div class="widget" class="vertical" id="search">
                 <form action="/tags/event/<%= event._id %>" method="POST">
-                    <label>Add A New Tag!</label>
+                    <h3 id="tagSearchTitle">Create a new tag!</h3>
                     <input placeholder="format: '#tag'" required pattern="#[a-z-]{2,}" type="text" name="tag">
                     <input type="submit" value="Add Tag">
                 </form>
             </div>
             <% } %>
+        </div>
 
+        <div class="vertical" id="mainPageTitle">
+            <h3>Event Details:</h3>
+            <div class="event" class="horizontal" id="zeroMargin">
+
+                <div class="eventTable" class="horizontal" >
+                    <h1 class="eventTitle"><%= event.title %></h1>
+                    <p class="weatherText">LOCATION: <%= event.location.locationTitle %></p>
+                    <p class="weatherText">DATE: <%= event.dateOf.toLocaleDateString() %></p>
+                    <p class="weatherText">TIME: <%= event.time %></p>
+                    <p class="weatherText">NOTES: <%= event.notes %></p>
+                    <% event.tags.forEach(function(tag) { %>
+                        <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
+                            <input class="tags2" type="submit" value="<%= tag %>">
+                        </form>
+                    <% }) %>
+                    <% if(event.dateOf >= today) { %>
+                        <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
+                    <% } %>
+                </div>
+
+                <% if (event.weather.length !==0) { %>
+                    <div class="weatherBox" class="horizontal">
+                        <h3 class="weatherTitle">WEATHER - <%= event.weather[0].createdAt.toLocaleDateString() %></h3>
+                        <img src="http://openweathermap.org/img/wn/<%= event.weather[0].icon %>@2x.png">
+                        <p class="weatherText">WEATHER: <%= event.weather[0].main %></p>
+                        <p class="weatherText">TEMP: <%= event.weather[0].temperature %>°F</p>
+                        <p class="weatherText">FEELS LIKE: <%= event.weather[0].feels_like %>°F</p>
+                        <p class="weatherText">HUMIDITY: <%= event.weather[0].humidity %>%</p>
+                        <p class="weatherText">WIND: <%= event.weather[0].wind_speed %>mph</p>
+                        <a href="/events/<%= event._id %>/weather">UPDATE WEATHER</a>
+                    </div>
+                <% } else { %>
+                    <div class="weatherBox" class="horizontal">
+                        <h5>Please Add Weather!</h5>
+                        <a href="/events/<%= event._id %>/weather">ADD WEATHER</a>
+                    </div>
+                <% } %>
+            </div>
         </div>
     </div>
 
-<%- include('../partials/footer') %>
+
+
+        <%- include('../partials/footer') %>

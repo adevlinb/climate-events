@@ -1,8 +1,8 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
-  background-image: url(../public/images/climate-events-logo.png);
-  background-color: rgb(253, 235, 213);
+  background-image: url("/images/background-main3.jpeg");
+  background-size: cover;
   width: 100%;
   height: 100vh;
   margin: 0;
@@ -31,14 +31,15 @@ body {
 #navDisplay {
   display: flex;
   flex-direction: row;
-  background-image: url("/images/stone2.jpeg");
-
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
 }
 
 #footer {
   display: flex;
   flex-direction: row;
-  background-image: url("/images/stone2.jpeg");
+  background-color: rgba(0,0,0,0.5);
   margin-top: 10px;
   position: absolute;
   bottom: 0;
@@ -46,11 +47,14 @@ body {
   right: 0;
 }
 
+#footerH3 {
+  margin-left: 20px;
+}
+
 #insideLogo {
   max-height: 75px;
   max-width: auto;
   float: left;
-  align-self: center;
 }
 
 ul {
@@ -74,17 +78,25 @@ li {
   height: 30px;
 }
 
-#widget {
+.widget {
   min-width: 300px;
   width: 300px;
   height: fit-content;
-  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: 20px;
   margin-right: 20px;
   border-color: black;
   border-style: solid;
   border-width: 1px;
   border-radius: 5px;  
   text-align: center;
+  background-color:rgba(226, 226, 226);
+  padding: 5px;
+}
+
+#search {
+  overflow: scroll;
+  max-height: 20vh;
 }
 
 #tagSearchTitle {
@@ -108,6 +120,10 @@ li {
 #allEventMargin {
   height: 73vh;
   overflow: scroll;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 0.5px;
+  background-color: rgba(128, 128, 128, 0.6);
 }
 
 .event {
@@ -115,12 +131,12 @@ li {
   grid-template-columns: 2fr 1fr;
   gap: 1rem;
   border-style: solid;
-  border-color: purple;
-  border-width: 5px;
+  border-color: black;
+  border-width: 2.5px;
   margin: 20px;
   border-radius: 10px;
   padding: 10px;
-  background-color: lightblue;
+  background-color: grey;
   min-width: 600px;
   max-width: 600px;
   min-height: 200px;
@@ -136,13 +152,21 @@ li {
   margin-bottom: 50px;
 }
 
-#tags{
-  background: none;
-  color: purple;
+.tags{
   border-style: none;
   text-decoration: underline;
   cursor: pointer;
   margin: 5px;
+  background-color: none;
+}
+
+.tags2 {
+  border-style: none;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 5px;
+  color: purple;
+  background: rgba(226, 226, 226);
 }
 
 .eventTitle {
@@ -157,6 +181,7 @@ li {
 
 #indDesc {
   max-width: 300px;
+  margin-top: 5px;
 }
 
 .eventTable {
@@ -164,26 +189,35 @@ li {
   margin-right: 5px;
   display: flex;
   flex-direction: column;
-  border: solid 3px purple;
+  border: solid 1.5px black;
   border-radius: 10px;
   min-width: fit-content;
   box-shadow: 10px;
   text-align: left;
+  background-image: url("/images/background-main1.jpeg");
+  background-size: cover;
+  box-shadow: 3px 5px rgba(0, 0, 0, 0.25);
 }
 
 .weatherBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: solid 3px purple;
+  border: solid 1.5px black;
+  background-image: url("/images/background-main1.jpeg");
+  background-size: cover;
   border-radius: 10px;
   min-width: fit-content;
   padding: 5px;
-
+  box-shadow: 3px 5px rgba(0, 0, 0, 0.25);
 }
 
 .weatherText {
   margin: 2px;
+}
+
+#zeroMargin {
+  margin-top: 0;
 }
 
 .weatherTitle {

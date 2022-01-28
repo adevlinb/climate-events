@@ -3,9 +3,10 @@
 
     <div class="horizontal">
 
-        <div class="vertical">
-                <div id=widget>
-                    <h3> Create an Event!</h3>
+        <div class="vertical" id="mainPageTitle">
+                <h3>ToolBar</h3>
+                <div class="widget">
+                    <h3 id="tagSearchTitle"> Create an Event!</h3>
                     <p id="indDesc">
                         Here you can add new events to your planner! You may type in
                         any address in the world and our api will convert that address into 
@@ -21,32 +22,33 @@
         </div>
 
         <div class="vertical" id="mainPageTitle">
-            <div id="allEventMargin">
-                <div class="event" class="horizontal">
-                    <div class="vertical">
-                        <h3><%= titlePage %></h3>
-                        <form class="vertical" class="newEvent" action="/events" method="POST">
-                                <label>Title</label>
-                                <input type="text" name="title">
-                                <label>Location</label>
-                                <input type="text" name="locationName" placeholder="Full Address / City / Country">
-                                <label>Date</label>
-                                <input type="date" name="dateOf">
-                                <label>Time</label>
-                                <input type="time" name="time">
-                                <label>Notes</label>
-                                <textarea type="textarea" name="notes"></textarea>
-                                <input type="submit" value="Add Event">
-                        </form>
-                    </div>
-                    <div class="weatherBox" class="horizontal">
-                        <h3 class="weatherTitle">WEATHER</h3>
-                        <p>You will be able to add weather and tags to this
-                            space once you have created your event. You can update both
-                            on the details page for that event! The link will be in the
-                            event on the main events page.
-                        </p>
-                    </div>
+            <h3><%= user.name %>'s Event</h3>
+            <div class="event" class="horizontal" id="zeroMargin"
+            >
+                <div class="eventTable" class="horizontal">
+                    <h3>Create:</h3>
+                    <form class="vertical" class="newEvent" action="/events" method="POST">
+                            <label>Title</label>
+                            <input type="text" name="title">
+                            <label>Location</label>
+                            <input type="text" name="locationName" placeholder="Full Address / City / Country">
+                            <label>Date</label>
+                            <input type="date" name="dateOf">
+                            <label>Time</label>
+                            <input type="time" name="time">
+                            <label>Notes</label>
+                            <textarea type="textarea" name="notes"></textarea>
+                            <input type="submit" value="Add Event">
+                    </form>
+                </div>
+
+                <div class="weatherBox" class="horizontal">
+                    <h3 class="weatherTitle">WEATHER</h3>
+                    <p>You will be able to add weather and tags to this
+                        space once you have created your event. You can update both
+                        on the details page for that event! The link will be in the
+                        event on the main events page.
+                    </p>
                 </div>
             </div>
         </div>
