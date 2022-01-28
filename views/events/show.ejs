@@ -34,6 +34,11 @@
                 </form>
             </div>
             <% } %>
+            <div class="widget" class="vertical" id="search">
+                <form class="vertical" action="/events/<%= event._id %>?_method=DELETE" method="POST">
+                    <input type="submit" value="DELETE THIS EVENT">
+                </form>
+            </div>
         </div>
         <div class="vertical" id="mainPageTitle">
             <h3>Event Details:</h3>

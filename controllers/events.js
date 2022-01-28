@@ -18,7 +18,8 @@ module.exports = {
     addTag,
     edit,
     update,
-    getWeather
+    getWeather,
+    deleteEvent
 }
 
 function index(req, res) {
@@ -149,6 +150,12 @@ function getWeather(req, res) {
         } else {
             res.redirect('/events');
         }
+    });
+}
+
+function deleteEvent(req, res) {
+    Event.findByIdAndDelete(req.params.eid, function (err){
+        res.redirect('/events');
     });
 }
 

@@ -21,6 +21,8 @@ router.post('/:tid/tags/:eid', isLoggedIn, eventsCtrl.addTag);
 router.get('/:eid/edit', isLoggedIn, eventsCtrl.edit);
 // get current weather
 router.get('/:eid/weather', isLoggedIn, eventsCtrl.getWeather);
+// delete the event
+router.delete('/:eid', isLoggedIn, eventsCtrl.deleteEvent);
 
 
 
