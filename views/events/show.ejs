@@ -2,7 +2,6 @@
 
     <div class="horizontal">
         <div class="vertical" id="mainPageTitle">
-
             <h3>ToolBar</h3>
             <div class=widget>
                 <h3 id="tagSearchTitle">Details</h3>
@@ -13,7 +12,6 @@
                     once a day and get the current weather at the time.
                 </p>
             </div>
-
             <% if(event.dateOf >= today) { %>
             <div class="widget" class="vertical" id="search">
                 <h3 id="tagSearchTitle">Click on a tag to add one!</h3>
@@ -22,13 +20,12 @@
                         <% tags.forEach(function(t) { %>
                         <form action="/events/<%= t._id %>/tags/<%= event._id %>" method="POST">
                         <input class="tags2" type="submit" value="<%= t.tag %>"></form>
-                    <% }) %>
-                <% } else { %>
-                    <h1>ADD SOME TAGS!</h1>
-                <% } %>
+                        <% }) %>
+                        <% } else { %>
+                        <h1>ADD SOME TAGS!</h1>
+                    <% } %>
                 </div>
             </div>
-          
             <div class="widget" class="vertical" id="search">
                 <form action="/tags/event/<%= event._id %>" method="POST">
                     <h3 id="tagSearchTitle">Create a new tag!</h3>
@@ -38,11 +35,9 @@
             </div>
             <% } %>
         </div>
-
         <div class="vertical" id="mainPageTitle">
             <h3>Event Details:</h3>
             <div class="event" class="horizontal" id="zeroMargin">
-
                 <div class="eventTable" class="horizontal" >
                     <h1 class="eventTitle"><%= event.title %></h1>
                     <p class="weatherText">LOCATION: <%= event.location.locationTitle %></p>
@@ -51,16 +46,15 @@
                     <p class="weatherText">NOTES: <%= event.notes %></p>
                     <div id="tagSearch">
                         <% event.tags.forEach(function(tag) { %>
-                            <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
-                                <input class="tags2" type="submit" value="<%= tag %>">
-                            </form>
+                        <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
+                            <input class="tags2" type="submit" value="<%= tag %>">
+                        </form>
                         <% }) %>
                     </div>
                     <% if(event.dateOf >= today) { %>
-                        <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
+                    <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
                     <% } %>
                 </div>
-
                 <% if (event.weather.length !==0) { %>
                     <div class="weatherBox" class="horizontal">
                         <h3 class="weatherTitle">WEATHER - <%= event.weather[0].createdAt.toLocaleDateString() %></h3>
@@ -73,15 +67,13 @@
                         <a href="/events/<%= event._id %>/weather">UPDATE WEATHER</a>
                     </div>
                 <% } else { %>
-                    <div class="weatherBox" class="horizontal">
-                        <h5>Please Add Weather!</h5>
-                        <a href="/events/<%= event._id %>/weather">ADD WEATHER</a>
-                    </div>
+                <div class="weatherBox" class="horizontal">
+                    <h5>Please Add Weather!</h5>
+                    <a href="/events/<%= event._id %>/weather">ADD WEATHER</a>
+                </div>
                 <% } %>
             </div>
         </div>
     </div>
 
-
-
-        <%- include('../partials/footer') %>
+<%- include('../partials/footer') %>

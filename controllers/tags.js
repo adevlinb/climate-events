@@ -15,21 +15,21 @@ function create(req, res) {
         } else {
             Tag.create(req.body, function(err, tag){
                 res.redirect(`/events/${req.params.id}`)
-            })
+            });
         }
-    })
+    });
 }
 
 function deleteTag (req, res) {
-        let tag = "#" + req.params.tag
-        Event.findById(req.params.eid, function (err, event) {
-            let newArray = event.tags.filter(function(ele){
-                if(ele !== tag) return ele;
-            });
-            event.tags = newArray;
-            event.save(function (err) {
-                res.redirect(`/events/${req.params.eid}`);
-            });
+    let tag = "#" + req.params.tag
+    Event.findById(req.params.eid, function (err, event) {
+        let newArray = event.tags.filter(function(ele){
+            if(ele !== tag) return ele;
         });
+        event.tags = newArray;
+        event.save(function (err) {
+            res.redirect(`/events/${req.params.eid}`);
+        });
+    });
 }
 

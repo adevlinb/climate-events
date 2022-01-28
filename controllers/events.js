@@ -29,7 +29,7 @@ function index(req, res) {
     Event.find(query).sort('dateOf').exec( function (err, events) {
         Tag.find({}, function (err, tags) {
             res.render('events/index', { titlePage: "Events", events, tags });
-        })
+        });
     });
 }
 
@@ -42,8 +42,8 @@ function past(req, res) {
     Event.find({ dateOf: { $lt: today } }).sort('dateOf').exec(function (err, events) {
         Tag.find({}, function (err, tags) {
             res.render('events/past', { titlePage: "Past Events", events, tags });
-        })
-    })
+        });
+    });
 }
 
 
@@ -54,7 +54,7 @@ function create(req, res) {
     req.body.userId = req.user._id;
     req.body.userName = req.user.name;
     req.body.userAvatar = req.user.avatar;
-    const qString = req.body.locationName
+    const qString = req.body.locationName;
     const options = {
         method: "GET",
         headers: { apiKey: `${PTV_KEY}`, "Content-Type": "application/json" }
@@ -78,7 +78,7 @@ function create(req, res) {
                 Event.find({ dateOf: { $gt: today } }, function (err, events) {
                     res.redirect('/events');
                 });
-            })
+            });
         });
 
 };
@@ -88,9 +88,9 @@ function show(req, res) {
     Event.findById(req.params.id, function (err, event) {
         Tag.find({ tag: { $nin: event.tags } }, function (err, tags) {
             res.render('events/show', { titlePage: 'Details', event, tags, today });
-        })
+        });
     });
-};
+}
 
 function addTag(req, res) {
     Tag.findById(req.params.tid, function (err, tag) {
@@ -105,8 +105,8 @@ function addTag(req, res) {
 
 function edit(req, res) {
     Event.findById(req.params.eid, function (err, event) {
-        res.render('events/edit', { titlePage: 'Edit Event', event })
-    })
+        res.render('events/edit', { titlePage: 'Edit Event', event });
+    });
 }
 
 function update(req, res) {

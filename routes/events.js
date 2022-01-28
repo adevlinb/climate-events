@@ -18,9 +18,9 @@ router.get('/:id', isLoggedIn, eventsCtrl.show);
 // post new tag to current event
 router.post('/:tid/tags/:eid', isLoggedIn, eventsCtrl.addTag);
 // render edit ejs
-router.get('/:eid/edit', isLoggedIn, eventsCtrl.edit)
+router.get('/:eid/edit', isLoggedIn, eventsCtrl.edit);
 // get current weather
-router.get('/:eid/weather', isLoggedIn, eventsCtrl.getWeather)
+router.get('/:eid/weather', isLoggedIn, eventsCtrl.getWeather);
 
 
 

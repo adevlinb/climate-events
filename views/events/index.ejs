@@ -1,7 +1,6 @@
 <%- include('../partials/header') %>
 
     <div class="horizontal">
-
         <div class="vertical" id="mainPageTitle">
             <h3>ToolBar</h3>
             <div class=widget>
@@ -16,21 +15,18 @@
                 </p>
             </div>
             <div class="widget" class="vertical" id="search">
-                    <h3 id="tagSearchTitle">Search Tags:</h3>
-                    <a class="tags" href="/events"> ALL </a>
-                    <% tags.forEach(tag=> { %>
-                    <a class="tags" href="/events?tag=<%= tag.tag.substr(1) %>"><%= tag.tag %></a>
-                    <% }); %>
+                <h3 id="tagSearchTitle">Search Tags:</h3>
+                <a class="tags" href="/events"> ALL </a>
+                <% tags.forEach(tag=> { %>
+                <a class="tags" href="/events?tag=<%= tag.tag.substr(1) %>"><%= tag.tag %></a>
+                <% }); %>
             </div>
         </div>
-          
         <div class="vertical" id="mainPageTitle">
             <h3><%= user.name %>'s <%= titlePage %></h3>
             <div id="allEventMargin">
-                
                 <% events.forEach(function(e) { %>
                 <div class="event" class="horizontal">
-
                     <div class="eventTable" class="horizontal">
                         <h1 class="eventTitle"><%= e.title %></h1>
                         <p class="weatherText">LOCATION: <%= e.location.locationTitle %></p>
@@ -48,9 +44,7 @@
                             <% } %>
                         <a href="/events/<%= e._id %>">DETAILS</a>
                     </div>
-
                     <% if (e.weather.length !== 0) { %>
-
                     <div class="weatherBox" class="horizontal">
                         <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
                         <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png"></div>
@@ -71,6 +65,4 @@
         </div>
     </div>
     
- 
-
 <%- include('../partials/footer') %>

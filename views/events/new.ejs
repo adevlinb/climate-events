@@ -1,30 +1,26 @@
 <%- include('../partials/header') %>
 
-
     <div class="horizontal">
-
         <div class="vertical" id="mainPageTitle">
-                <h3>ToolBar</h3>
-                <div class="widget">
-                    <h3 id="tagSearchTitle"> Create an Event!</h3>
-                    <p id="indDesc">
-                        Here you can add new events to your planner! You may type in
-                        any address in the world and our api will convert that address into 
-                        latitudinal and longitudinal coordinates that will be used to 
-                        grab weather data for your events! You can be as specific as the address 
-                        for the location you want to go to, or generic using the City Name, and State or
-                        Country Name! Then add a date with specific time informtation (not required) along with
-                        notes, which are not required either! You can always edit / update the information later.
-                        Only the location will be un-editable. You will have to create new event if you want to change the location.
-                        Have fun!
-                    </p>
-                </div>
+            <h3>ToolBar</h3>
+            <div class="widget">
+                <h3 id="tagSearchTitle"> Create an Event!</h3>
+                <p id="indDesc">
+                    Here you can add new events to your planner! You may type in
+                    any address in the world and our api will convert that address into 
+                    latitudinal and longitudinal coordinates that will be used to 
+                    grab weather data for your events! You can be as specific as the address 
+                    for the location you want to go to, or generic using the City Name, and State or
+                    Country Name! Then add a date with specific time informtation (not required) along with
+                    notes, which are not required either! You can always edit / update the information later.
+                    Only the location will be un-editable. You will have to create new event if you want to change the location.
+                    Have fun!
+                </p>
+            </div>
         </div>
-
         <div class="vertical" id="mainPageTitle">
             <h3><%= user.name %>'s Event</h3>
-            <div class="event" class="horizontal" id="zeroMargin"
-            >
+            <div class="event" class="horizontal" id="zeroMargin">
                 <div class="eventTable" class="horizontal">
                     <h3>Create:</h3>
                     <form class="vertical" class="newEvent" action="/events" method="POST">
@@ -41,7 +37,6 @@
                             <input type="submit" value="Add Event">
                     </form>
                 </div>
-
                 <div class="weatherBox" class="horizontal">
                     <h3 class="weatherTitle">WEATHER</h3>
                     <p>You will be able to add weather and tags to this

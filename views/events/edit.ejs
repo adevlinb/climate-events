@@ -1,22 +1,16 @@
 <%- include('../partials/header') %>
 
-
     <div class="horizontal">
-
         <div class="vertical" id="mainPageTitle">
             <h3>ToolBar</h3>
             <div class="widget">
                 <h3 id="tagSearchTitle"> Edit Your Event!</h3>
-                <p id="indDesc">
-                    Here you can edit your event!
-                </p>
+                <p id="indDesc">Here you can edit your event!</p>
             </div>
         </div>
-
         <div class="vertical" id="mainPageTitle">
             <h3><%= user.name %>'s Event</h3>
             <div class="event" class="horizontal" id="zeroMargin">
-
                 <div class="eventTable" class="horizontal">
                     <h3 id="tagSearchTitle">Edit:</h3>
                     <form class="vertical" action="/events/<%= event._id %>?_method=PUT" method="POST">
@@ -31,27 +25,24 @@
                         <input type="submit" value="SAVE NEW INFO">
                     </form>
                 </div>
-
-                    <% if (event.weather.length !==0) { %>
-                    <div class="weatherBox" class="horizontal">
-                        <h3 class="weatherTitle">WEATHER - <%= event.weather[0].createdAt.toLocaleDateString() %>
-                        </h3>
-                        <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= event.weather[0].icon %>@2x.png"></div>
-                        <p class="weatherText">WEATHER: <%= event.weather[0].main %></p>
-                        <p class="weatherText">TEMP: <%= event.weather[0].temperature %>°F</p>
-                        <p class="weatherText">FEELS LIKE: <%= event.weather[0].feels_like %>°F</p>
-                        <p class="weatherText">HUMIDITY: <%= event.weather[0].humidity %>%</p>
-                        <p class="weatherText">WIND: <%= event.weather[0].wind_speed %>mph</p>
-                        <a href="/events/<%= event._id %>/weather">UPDATE WEATHER</a>
-                    </div>
-
-                    <% } else { %>
-                    <div class="weatherBox" class="horizontal">
-                        <h5>Please Add Weather!</h5>
-                        <a href="/events/<%= event._id %>/weather">ADD WEATHER</a>
-                    </div>
-                    <% } %>
-
+                <% if (event.weather.length !==0) { %>
+                <div class="weatherBox" class="horizontal">
+                    <h3 class="weatherTitle">WEATHER - <%= event.weather[0].createdAt.toLocaleDateString() %>
+                    </h3>
+                    <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= event.weather[0].icon %>@2x.png"></div>
+                    <p class="weatherText">WEATHER: <%= event.weather[0].main %></p>
+                    <p class="weatherText">TEMP: <%= event.weather[0].temperature %>°F</p>
+                    <p class="weatherText">FEELS LIKE: <%= event.weather[0].feels_like %>°F</p>
+                    <p class="weatherText">HUMIDITY: <%= event.weather[0].humidity %>%</p>
+                    <p class="weatherText">WIND: <%= event.weather[0].wind_speed %>mph</p>
+                    <a href="/events/<%= event._id %>/weather">UPDATE WEATHER</a>
+                </div>
+                <% } else { %>
+                <div class="weatherBox" class="horizontal">
+                    <h5>Please Add Weather!</h5>
+                    <a href="/events/<%= event._id %>/weather">ADD WEATHER</a>
+                </div>
+                <% } %>
             </div>
         </div>
     </div>
