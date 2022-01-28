@@ -64,7 +64,7 @@ function create(req, res) {
         .then(result => {
             console.log(result.locations[0].formattedAddress);
             location = {
-                locationTitle: `${result.locations[0].address.city}, ${result.locations[0].address.state}, ${result.locations[0].address.country}`,
+                locationTitle: `${result.locations[0].address.city}, ${result.locations[0].address.state}`,
                 locationName: req.body.locationName,
                 latitude: result.locations[0].referencePosition.latitude,
                 longitude: result.locations[0].referencePosition.longitude

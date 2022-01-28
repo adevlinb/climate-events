@@ -49,11 +49,13 @@
                     <p class="weatherText">DATE: <%= event.dateOf.toLocaleDateString() %></p>
                     <p class="weatherText">TIME: <%= event.time %></p>
                     <p class="weatherText">NOTES: <%= event.notes %></p>
-                    <% event.tags.forEach(function(tag) { %>
-                        <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
-                            <input class="tags2" type="submit" value="<%= tag %>">
-                        </form>
-                    <% }) %>
+                    <div id="tagSearch">
+                        <% event.tags.forEach(function(tag) { %>
+                            <form action="/tags/<%= tag.substr(1) %>/events/<%= event._id %>?_method=DELETE" method="POST">
+                                <input class="tags2" type="submit" value="<%= tag %>">
+                            </form>
+                        <% }) %>
+                    </div>
                     <% if(event.dateOf >= today) { %>
                         <a href="/events/<%= event._id %>/edit">EDIT EVENT INFO</a>
                     <% } %>
@@ -62,7 +64,7 @@
                 <% if (event.weather.length !==0) { %>
                     <div class="weatherBox" class="horizontal">
                         <h3 class="weatherTitle">WEATHER - <%= event.weather[0].createdAt.toLocaleDateString() %></h3>
-                        <img src="http://openweathermap.org/img/wn/<%= event.weather[0].icon %>@2x.png">
+                        <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= event.weather[0].icon %>@2x.png"></div>
                         <p class="weatherText">WEATHER: <%= event.weather[0].main %></p>
                         <p class="weatherText">TEMP: <%= event.weather[0].temperature %>°F</p>
                         <p class="weatherText">FEELS LIKE: <%= event.weather[0].feels_like %>°F</p>

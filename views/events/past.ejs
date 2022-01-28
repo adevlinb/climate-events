@@ -38,9 +38,11 @@
                             <p class="weatherText">TIME: <%= e.time %></p>
                             <p class="weatherText">NOTES: <%= e.notes %></p>
                             <% if(tags.length) { %>
+                                <div class="divTag">
                                 <% tags.forEach(function(t) { %>
-                                    <div><%= t.tag %></div>
+                                    <%= t.tag %>
                                 <% }) %>
+                                </div>
                             <% } else { %>
                             <h1>ADD SOME TAGS!</h1>
                             <% } %>
@@ -50,7 +52,7 @@
 
                             <div class="weatherBox" class="horizontal">
                                 <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
-                                <img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png">
+                                <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png"></div>
                                 <p class="weatherText">WEATHER: <%= e.weather[0].main %></p>
                                 <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>
                                 <p class="weatherText">FEELS LIKE: <%= e.weather[0].feels_like %>°F</p>
