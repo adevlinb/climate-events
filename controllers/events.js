@@ -42,7 +42,7 @@ function newEvent(req, res) {
 
 function past(req, res) {
     var today = new Date;
-    Event.find({ dateOf: { $lt: today } }).sort('dateOf').exec(function (err, events) {
+    Event.find({ dateOf: { $lt: today }, userId: req.user._id }).sort('dateOf').exec(function (err, events) {
         Tag.find({}, function (err, tags) {
             res.render('events/past', { titlePage: "Past Events", events, tags });
         });
