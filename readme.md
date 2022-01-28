@@ -13,11 +13,15 @@
 <img src="https://i.imgur.com/qnMP10B.png" width=300px/>
 <img src="https://i.imgur.com/RZtDlE4.png" width=300px/>
 
-1. Enter the app via Google OAUTH 
-2. Search via TAGS or create a new event.
-3. Click on details to view an individual event.
-4. Fetch / update the weather, add / delete tags, and edit information for the event. 
-4. Navigate to "past events" to see the events that have already passed.
+### **GETTING STARTED** 
+
+1. You can acces my [TRELLO BOARD](https://trello.com/b/SWAZezhv/project-2) to see project organization and thought process.
+2. And use this link: [CLIMATE EVENTS](https://climate-events.herokuapp.com/) to access the deployed app.
+3. Enter the app via Google OAUTH 
+4. Search via TAGS or create a new event.
+5. Click on details to view an individual event.
+6. Fetch / update the weather, add / delete tags, and edit information for the event. 
+7. Navigate to "past events" to see the events that have already passed.
 
 ### ICEBOX:
 
