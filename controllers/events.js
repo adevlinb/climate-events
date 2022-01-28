@@ -1,5 +1,6 @@
 const Event = require('../models/event');
 const Tag = require('../models/tag');
+
 const Weather = require
 const fetch = require('node-fetch');
 const { get } = require('express/lib/response');
@@ -27,7 +28,7 @@ function index(req, res) {
     var today = new Date;
     const tag = req.query.tag
     const query = tag ?
-        { tags: `#${tag}`, dateOf: { $gt: today }, userName: req.user.name} : { dateOf: { $gt: today }, userName: req.user.name };
+        { tags: `#${tag}`, dateOf: { $gt: today }, userId: req.user._id} : { dateOf: { $gt: today }, userId: req.user._id };
     Event.find(query).sort('dateOf').exec( function (err, events) {
         Tag.find({}, function (err, tags) {
             res.render('events/index', { titlePage: "Events", events, tags });
