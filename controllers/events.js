@@ -3,6 +3,7 @@ const Tag = require('../models/tag');
 const Weather = require
 const fetch = require('node-fetch');
 const { get } = require('express/lib/response');
+const user = require('../models/user');
 const PTV_KEY = process.env.PTV_KEY;
 const PTV_URL = 'https://api.myptv.com/geocoding/v1/locations/by-text?';
 const PTV_ENCODE = process.env.PTV_ENCODE;
@@ -26,7 +27,7 @@ function index(req, res) {
     var today = new Date;
     const tag = req.query.tag
     const query = tag ?
-        { tags: `#${tag}`, dateOf: { $gt: today } } : { dateOf: { $gt: today } };
+        { tags: `#${tag}`, dateOf: { $gt: today }, userName: req.user.name} : { dateOf: { $gt: today }, userName: req.user.name };
     Event.find(query).sort('dateOf').exec( function (err, events) {
         Tag.find({}, function (err, tags) {
             res.render('events/index', { titlePage: "Events", events, tags });
