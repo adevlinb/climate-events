@@ -24,44 +24,48 @@
         </div>
         <div class="vertical" id="mainPageTitle">
             <h3><%= user.name %>'s <%= titlePage %></h3>
-            <div id="allEventMargin">
-                <% events.forEach(function(e) { %>
-                <div class="event" class="horizontal">
-                    <div class="eventTable" class="horizontal">
-                        <h1 class="eventTitle"><%= e.title %></h1>
-                        <p class="weatherText">LOCATION: <%= e.location.locationTitle %></p>
-                        <p class="weatherText">DATE: <%= e.dateOf.toLocaleDateString() %></p>
-                        <p class="weatherText">TIME: <%= e.time %></p>
-                        <p class="weatherText">NOTES: <%= e.notes %></p>
-                            <% if(e.tags.length) { %>
-                                <div class="divTag">
-                                    <% e.tags.forEach(function(t) { %>
-                                    <%= t %>
-                                    <% }) %>
-                                </div>
-                            <% } else { %>
-                            <h3>ADD SOME TAGS!</h3>
-                            <% } %>
-                        <a href="/events/<%= e._id %>">DETAILS</a>
+            <% if (events.length !== 0) { %>
+                <div id="allEventMargin">
+                    <% events.forEach(function(e) { %>
+                    <div class="event" class="horizontal">
+                        <div class="eventTable" class="horizontal">
+                            <h1 class="eventTitle"><%= e.title %></h1>
+                            <p class="weatherText">LOCATION: <%= e.location.locationTitle %></p>
+                            <p class="weatherText">DATE: <%= e.dateOf.toLocaleDateString() %></p>
+                            <p class="weatherText">TIME: <%= e.time %></p>
+                            <p class="weatherText">NOTES: <%= e.notes %></p>
+                                <% if(e.tags.length) { %>
+                                    <div class="divTag">
+                                        <% e.tags.forEach(function(t) { %>
+                                        <%= t %>
+                                        <% }) %>
+                                    </div>
+                                <% } else { %>
+                                <h3>ADD SOME TAGS!</h3>
+                                <% } %>
+                            <a href="/events/<%= e._id %>">DETAILS</a>
+                        </div>
+                        <% if (e.weather.length !== 0) { %>
+                        <div class="weatherBox" class="horizontal">
+                            <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
+                            <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png"></div>
+                            <p class="weatherText">WEATHER: <%= e.weather[0].main %></p>
+                            <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>
+                            <p class="weatherText">FEELS LIKE: <%= e.weather[0].feels_like %>°F</p>
+                            <p class="weatherText">HUMIDITY: <%= e.weather[0].humidity %>%</p>
+                            <p class="weatherText">WIND: <%= e.weather[0].wind_speed %>mph</p>
+                        </div>
+                        <% } else { %>
+                        <div class="weatherBox" class="horizontal">
+                            <h5>Please Add Weather In The Details Page!</h5>
+                        </div>
+                        <% } %>
                     </div>
-                    <% if (e.weather.length !== 0) { %>
-                    <div class="weatherBox" class="horizontal">
-                        <h3 class="weatherTitle">WEATHER - <%= e.weather[0].createdAt.toLocaleDateString() %></h3>
-                        <div id="iconBurst"><img src="http://openweathermap.org/img/wn/<%= e.weather[0].icon %>@2x.png"></div>
-                        <p class="weatherText">WEATHER: <%= e.weather[0].main %></p>
-                        <p class="weatherText">TEMP: <%= e.weather[0].temperature %>°F</p>
-                        <p class="weatherText">FEELS LIKE: <%= e.weather[0].feels_like %>°F</p>
-                        <p class="weatherText">HUMIDITY: <%= e.weather[0].humidity %>%</p>
-                        <p class="weatherText">WIND: <%= e.weather[0].wind_speed %>mph</p>
-                    </div>
-                    <% } else { %>
-                    <div class="weatherBox" class="horizontal">
-                        <h5>Please Add Weather In The Details Page!</h5>
-                    </div>
-                    <% } %>
+                    <% }); %>
                 </div>
-                <% }); %>
-            </div>
+            <% } else { %>
+                <h1>Please add an event on the "ADD EVENT PAGE" above!</h1>
+            <% } %>
         </div>
     </div>
     
