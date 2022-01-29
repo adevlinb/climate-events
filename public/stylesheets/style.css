@@ -240,6 +240,7 @@ li {
   color: white;
   text-decoration: none;
   margin-left: 28vw;
+  position: absolute;
 }
 
 .divTag{
